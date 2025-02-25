@@ -1,0 +1,921 @@
+{% load static  %}
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta http-equiv="Cache-Control" content="max-age=3600, public">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; img-src 'self' data:; object-src 'none';">
+    {% comment %} <meta http-equiv="Set-Cookie" content="HttpOnly; Secure; SameSite=Strict"> {% endcomment %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" async></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js"></script>
+    <title>Panchayat Sandesh</title>
+    <link rel="icon" href="/media/images/panchayat_sandesh_logo.png" type="image/x-icon">
+</head>
+<body class="bg-[#f5e3c4] text-[#5a3d2b]">
+    <!-- Top Info Bar -->
+    <div class="bg-[#2a1612] text-[#efe6d4] text-sm hidden md:block">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center py-2">
+                <!-- Contact Info -->
+                <div class="flex flex-col md:flex-row items-center md:space-x-6 space-y-2 md:space-y-0 mb-3 md:mb-0 w-full md:w-auto">
+                    <a href="mailto:contact@panchayatsandesh.com" class="flex items-center hover:text-[#d8982e] transition-colors duration-300 w-full md:w-auto justify-center">
+                        <i class="bi bi-envelope mr-2"></i>
+                        <span>contact@panchayatsandesh.com</span>
+                    </a>
+                    <a href="tel:+911234567890" class="flex items-center hover:text-[#d8982e] transition-colors duration-300 w-full md:w-auto justify-center">
+                        <i class="bi bi-telephone mr-2"></i>
+                        <span>+91 123 456 7890</span>
+                    </a>
+                </div>
+
+                <!-- Right Section -->
+                <div class="flex flex-col md:flex-row items-center md:space-x-6 space-y-3 md:space-y-0 w-full md:w-auto">
+                    <!-- Breaking News -->
+                    <div class="hidden md:flex items-center">
+                        <span class="bg-[#d8982e] text-white px-2 py-0.5 rounded-sm text-xs font-bold mr-2">LIVE</span>
+                        <span class="text-[#d8982e]">Breaking News:</span>
+                        <span class="ml-2 truncate max-w-md">Latest updates on rural development initiatives across India</span>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="flex items-center space-x-6 justify-center w-full md:w-auto">
+                        <a href="#" class="hover:text-[#d8982e] transition-colors duration-300 text-xl md:text-base">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                        <a href="#" class="hover:text-[#d8982e] transition-colors duration-300 text-xl md:text-base">
+                            <i class="bi bi-twitter"></i>
+                        </a>
+                        <a href="#" class="hover:text-[#d8982e] transition-colors duration-300 text-xl md:text-base">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <header class="sticky top-0 z-50 w-full">
+        <!-- Top Bar -->
+        <div class="bg-[#3d1f1a] text-white">
+            <div class="container mx-auto px-4 py-2 md:py-3">
+                <div class="flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0">
+                    <!-- Left Section -->
+                    <div class="hidden md:block text-base md:text-lg lg:text-xl font-bold tracking-wide animate__animated animate__fadeInLeft">
+                        <span class="hidden md:inline">THE</span> PANCHAYAT SANDESH
+                    </div>
+
+                    <!-- Center Logo -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 hidden md:block">
+                        <div class="animate__animated animate__fadeInDown">
+                            <img src="/media/images/panchayat_sandesh_logo.png" 
+                                 alt="THE PANCHAYATSANDESH" 
+                                 class="h-10 md:h-12 lg:h-14 object-contain lazyload"
+                                 loading="lazy">
+                        </div>
+                    </div>
+
+                    <!-- Mobile Logo and Subscribe Button Container -->
+                    <div class="w-full md:hidden flex justify-between items-center">
+                        <!-- Logo -->
+                        <div class="animate__animated animate__fadeInDown">
+                            <img src="/media/images/panchayat_sandesh_logo.png" 
+                                 alt="THE PANCHAYATSANDESH" 
+                                 class="h-8 object-contain lazyload"
+                                 loading="lazy">
+                        </div>
+
+                        <!-- Subscribe Button -->
+                        <div class="animate__animated animate__fadeInRight">
+                            <a href="{% url 'subscribe' %}" 
+                               class="inline-block bg-[#73594a] hover:bg-[#5a4437] px-3 py-1.5 rounded-lg transition-all duration-300 text-xs font-medium transform hover:scale-105">
+                                SUBSCRIBE NOW
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right Section (Subscribe Button) -->
+                    <div class="hidden md:block animate__animated animate__fadeInRight">
+                        <a href="{% url 'subscribe' %}" 
+                           class="inline-block bg-[#73594a] hover:bg-[#5a4437] px-6 py-2 rounded-lg transition-all duration-300 text-base font-medium transform hover:scale-105">
+                            SUBSCRIBE NOW
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="bg-[#f5e3c4] shadow-lg">
+            <div class="container mx-auto px-4">
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <ul class="flex justify-center items-center space-x-4 lg:space-x-8 py-4">
+                        <li class="group">
+                            <a href="{% url 'home' %}" class="text-sm lg:text-base font-semibold tracking-wide hover:text-[#d8982e] transition-colors duration-300 relative py-2">
+                                HOME
+                                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-[#d8982e] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                            </a>
+                        </li>
+                        <li class="group">
+                            <a href="{% url 'about-us' %}" class="text-sm lg:text-base font-semibold tracking-wide hover:text-[#d8982e] transition-colors duration-300 relative py-2">
+                                ABOUT US
+                                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-[#d8982e] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                            </a>
+                        </li>
+                        <li class="group">
+                            <a href="{% url 'categories' %}" class="text-sm lg:text-base font-semibold tracking-wide hover:text-[#d8982e] transition-colors duration-300 relative py-2">
+                                CATEGORIES
+                                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-[#d8982e] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                            </a>
+                        </li>
+                        <li class="group">
+                            <a href="{% url 'team' %}" class="text-sm lg:text-base font-semibold tracking-wide hover:text-[#d8982e] transition-colors duration-300 relative py-2">
+                                TEAM
+                                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-[#d8982e] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                            </a>
+                        </li>
+                        <li class="group">
+                            <a href="{% url 'upcoming-events' %}" class="text-sm lg:text-base font-semibold tracking-wide hover:text-[#d8982e] transition-colors duration-300 relative py-2">
+                                UPCOMING EVENTS
+                                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-[#d8982e] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                            </a>
+                        </li>
+                        <li class="group">
+                            <a href="{% url 'gallery' %}" class="text-sm lg:text-base font-semibold tracking-wide hover:text-[#d8982e] transition-colors duration-300 relative py-2">
+                                GALLERY
+                                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-[#d8982e] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                            </a>
+                        </li>
+                        <li class="group">
+                            <a href="{% url 'donation' %}" class="text-sm lg:text-base font-semibold tracking-wide hover:text-[#d8982e] transition-colors duration-300 relative py-2">
+                                DONATE
+                                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-[#d8982e] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Mobile Navigation -->
+                <div class="md:hidden relative py-3">
+                    <button class="menu-toggle w-full flex items-center justify-between px-4 py-2 focus:outline-none">
+                        <span class="text-lg font-semibold">Menu</span>
+                        <i class="bi bi-list text-2xl"></i>
+                    </button>
+                    <ul class="mobile-nav absolute top-full left-0 right-0 bg-white shadow-xl rounded-b-xl overflow-hidden max-h-0 opacity-0 transition-all duration-300">
+                        <li>
+                            <a href="{% url 'home' %}" class="block px-6 py-3 hover:bg-[#f5e3c4] transition-colors duration-200 text-sm font-medium">
+                                HOME
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'about-us' %}" class="block px-6 py-3 hover:bg-[#f5e3c4] transition-colors duration-200 text-sm font-medium">
+                                ABOUT US
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'categories' %}" class="block px-6 py-3 hover:bg-[#f5e3c4] transition-colors duration-200 text-sm font-medium">
+                                CATEGORIES
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'team' %}" class="block px-6 py-3 hover:bg-[#f5e3c4] transition-colors duration-200 text-sm font-medium">
+                                TEAM
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'upcoming-events' %}" class="block px-6 py-3 hover:bg-[#f5e3c4] transition-colors duration-200 text-sm font-medium">
+                                UPCOMING EVENTS
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'gallery' %}" class="block px-6 py-3 hover:bg-[#f5e3c4] transition-colors duration-200 text-sm font-medium">
+                                GALLERY
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'donation' %}" class="block px-6 py-3 hover:bg-[#f5e3c4] transition-colors duration-200 text-sm font-medium">
+                                DONATE
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <main class="min-h-screen">
+        <div class="w-full hidden lg:block" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/media/home_banner_1.jpg'); background-size: cover; background-position: center;">
+            <div class="container mx-auto px-4 py-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8" style="min-height: 300px;">
+                    <div class="rounded-xl shadow-lg p-4 animate__animated animate__fadeInLeft animate__delay-1s transform hover:scale-[1.02] transition-transform duration-300 max-w-md">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="w-2.5 h-2.5 bg-[#d8982e] rounded-full animate-pulse"></span>
+                            <h2 class="text-lg font-bold text-white">HOT NEWS</h2>
+                        </div>
+                        {% if latest_hot_news %}
+                        <p class="text-base leading-relaxed text-white font-medium animate-pulse">{{latest_hot_news.title}}</p>
+                        {% else %}
+                        <p class="text-base leading-relaxed text-white font-medium animate-pulse">Panchayat Sandesh launches new digital platform to connect rural communities. Stay connected for more updates!</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="rounded-xl shadow-lg p-4 animate__animated animate__fadeInUp animate__delay-2s transform hover:scale-[1.02] transition-transform duration-300 max-w-md">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="w-2.5 h-2.5 bg-[#d8982e] rounded-full animate-pulse"></span>
+                            <h2 class="text-lg font-bold text-white">BREAKING NEWS</h2>
+                        </div>
+                        {% if latest_hot_news %}
+                        <p class="text-base leading-relaxed text-white font-medium animate-pulse">{{latest_hot_news.description}}</p>
+                        {% else %}
+                        <p class="text-base leading-relaxed text-white font-medium animate-pulse">Major infrastructure development project launched in rural areas - Government announces Rs. 500 crore package for village road connectivity and digital infrastructure upgrades across 100 gram panchayats.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full md:hidden" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/media/mobile-home-banner.jpg'); background-size: cover; background-position: center;">
+            <div class="container mx-auto px-4 py-6">
+                <div class="grid grid-cols-1 gap-6 mb-8" style="min-height: 250px;">
+                    <div class="rounded-xl shadow-lg p-4 animate__animated animate__fadeInLeft animate__delay-1s transform hover:scale-[1.02] transition-transform duration-300">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="w-2.5 h-2.5 bg-[#d8982e] rounded-full animate-pulse"></span>
+                            <h2 class="text-lg font-bold text-white">HOT NEWS</h2>
+                        </div>
+                        {% if latest_hot_news %}
+                        <p class="text-base leading-relaxed text-white font-medium animate-pulse">{{latest_hot_news.title}}</p>
+                        {% else %}
+                        <p class="text-base leading-relaxed text-white font-medium animate-pulse">Panchayat Sandesh launches new digital platform to connect rural communities. Stay connected for more updates!</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="rounded-xl shadow-lg p-4 animate__animated animate__fadeInUp animate__delay-2s transform hover:scale-[1.02] transition-transform duration-300">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="w-2.5 h-2.5 bg-[#d8982e] rounded-full animate-pulse"></span>
+                            <h2 class="text-lg font-bold text-white">BREAKING NEWS</h2>
+                        </div>
+                        {% if latest_hot_news %}
+                        <p class="text-base leading-relaxed text-white font-medium animate-pulse">{{latest_hot_news.description}}</p>
+                        {% else %}
+                        <p class="text-base leading-relaxed text-white font-medium animate-pulse">Major infrastructure development project launched in rural areas - Government announces Rs. 500 crore package for village road connectivity and digital infrastructure upgrades across 100 gram panchayats.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full h-16 bg-white/50 backdrop-blur-sm overflow-hidden">
+            <div id="scrollContainer" class="relative flex items-center h-full">
+                <!-- First set of images -->
+                <div class="flex items-center gap-16 px-8 whitespace-nowrap">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                </div>
+                <!-- Duplicate set for seamless loop -->
+                {% comment %} <div class="flex items-center gap-32 px-8 whitespace-nowrap">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
+                </div> {% endcomment %}
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const scrollContainer = document.getElementById('scrollContainer');
+                let scrollPosition = 0;
+                const speed = 1; // Adjust speed as needed
+
+                function animate() {
+                    scrollPosition -= speed;
+                    
+                    // Reset position when first set of images is fully scrolled
+                    if (scrollPosition <= -scrollContainer.children[0].offsetWidth) {
+                        scrollPosition = 0;
+                    }
+                    
+                    scrollContainer.style.transform = `translateX(${scrollPosition}px)`;
+                    requestAnimationFrame(animate);
+                }
+
+                animate();
+            });
+        </script>
+
+        <div class="bg-[#f3e6ca] py-16 px-4">
+            <div class="container mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold text-center mb-8 text-gray-800 font-['Yeseva_One']">"The Panchayat Sandesh"</h2>
+                
+                <div class="max-w-4xl mx-auto mb-16">
+                    <p class="text-lg md:text-xl text-gray-700 leading-relaxed text-center">
+                        <strong class="text-gray-900">Panchayat Sandesh</strong> is the official magazine of the All India Panchayat Parishad. It is a non-political and non-governmental organization established in 1958 in Jasidih, Bihar. The organization primarily focuses on the upliftment of the three-tier Panchayati Raj institutions (Village Panchayat, Block Panchayat, and District Panchayat) in India. It was founded to bring Mahatma Gandhi's concept of Gram Swaraj (village self-rule) to reality.
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-8">
+                    <div class="animate__animated animate__fadeInLeft w-full md:w-1/3">
+                        <div class="relative w-96 h-80 mx-auto mb-8">
+                            <img 
+                                src="media/images/mahatma-andhi.jpg" 
+                                alt="Mahatma Gandhi" 
+                                class="w-full h-full object-contain rounded-lg shadow-md lazyload transition-transform duration-300 hover:scale-105"
+                                loading="lazy"
+                            >
+                        </div>
+                        <h2 class="text-3xl font-bold text-center text-gray-900 mb-6 font-['Merriweather']">Mahatma Gandhi</h2>
+                        <p class="text-center text-gray-700 text-lg leading-relaxed">
+                            Great leader of the Indian independence movement in British-ruled India. His principles of non-violence and civil rights inspired movements worldwide.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-[#f3e6ca] py-16 px-4 max-w-full">
+            <div class="container mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold text-center mb-8 text-gray-800 font-['Yeseva_One']">"MP Panchayat Sandesh"</h2>
+                
+                <div class="max-w-4xl mx-auto mb-16">
+                    <p class="text-lg md:text-xl text-gray-700 leading-relaxed text-center">
+                        <strong class="text-gray-900">Panchayat Sandesh</strong> is the official magazine of the All India Panchayat Parishad. It is a non-political and non-governmental organization established in 1958 in Jasidih, Bihar. The organization primarily focuses on the upliftment of the three-tier Panchayati Raj institutions (Village Panchayat, Block Panchayat, and District Panchayat) in India. It was founded to bring Mahatma Gandhi's concept of Gram Swaraj (village self-rule) to reality.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                    <div class="animate__animated animate__fadeInLeft bg-white rounded-2xl shadow-xl transform transition-transform duration-300 hover:scale-105">
+                        <div class="relative overflow-hidden rounded-t-2xl">
+                            <img 
+                                src="media/prahlad singh patel.png" 
+                                alt="Prahlad Singh Patel" 
+                                class="w-full h-[300px] md:h-[400px] object-contain object-center transition-transform duration-500 hover:scale-110 lazyload"
+                                loading="lazy"
+                                decoding="async"
+                                fetchpriority="high"
+                                quality="max"
+                                sizes="(max-width: 768px) 100vw, 50vw"
+                                srcset="media/prahlad singh patel.png 1x, media/prahlad singh patel.png 2x"
+                                style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;"
+                            >
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                                <h2 class="text-2xl md:text-3xl font-bold text-white">Prahlad Singh Patel</h2>
+                                <p class="text-white/90 text-lg">Rural Development Minister</p>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-700 leading-relaxed">Leading initiatives for rural development and Panchayati Raj strengthening across Madhya Pradesh.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="animate__animated animate__fadeInRight bg-white rounded-2xl shadow-xl transform transition-transform duration-300 hover:scale-105">
+                        <div class="relative overflow-hidden rounded-t-2xl">
+                            <img 
+                                src="media/shivraj singh.png" 
+                                alt="Shivraj Singh Chouhan" 
+                                class="w-full h-[300px] md:h-[400px] object-contain object-center transition-transform duration-500 hover:scale-110 lazyload"
+                                loading="lazy"
+                                decoding="async"
+                                fetchpriority="high"
+                                quality="max"
+                                sizes="(max-width: 768px) 100vw, 50vw"
+                                srcset="media/shivraj singh.png 1x, media/shivraj singh.png 2x"
+                                style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;"
+                            >
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                                <h2 class="text-2xl md:text-3xl font-bold text-white">Shivraj Singh Chouhan</h2>
+                                <p class="text-white/90 text-lg">Chief Minister of Madhya Pradesh</p>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-700 leading-relaxed">Spearheading transformative policies for rural empowerment and sustainable development.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="w-full bg-[#f3e6ca] p-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Trending News -->
+            <div class="bg-[#f4e7cb] p-4 rounded-lg shadow-md">
+                <div class="flex items-center mb-4">
+                    <span class="w-3 h-3 rounded-full bg-[#d8982e] mr-2"></span>
+                    <h2 class="text-xl font-bold text-[#5a3d2b]">TRENDING NEWS</h2>
+                </div>
+    
+                <div class="space-y-6">
+                    {% if trending_news %}
+                    {% for tn in trending_news %}
+                    <div class="border-b border-gray-300 pb-4">
+                        <a class="block hover:bg-[#f4e7cb] transition duration-200 cursor-pointer" href="{% url 'news-detail' tn.title %}">
+                            <h3 class="font-bold text-lg text-[#5a3d2b]">{{tn.title}}</h3>
+                            <p class="text-sm text-gray-600">{{tn.author}}, {{tn.created_at | date:"M d, Y" }}</p>
+                        </a>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+    
+            <!-- Breaking News -->
+            <div class="relative breaking-news bg-[#f4e7cb] p-4 rounded-lg shadow-md">
+                <div class="flex items-center mb-4">
+                    <span class="w-3 h-3 rounded-full bg-[#d8982e] mr-2"></span>
+                    <h2 class="text-xl font-bold text-[#5a3d2b]">BREAKING NEWS</h2>
+                </div>
+                {% if bb %}
+                {% for b in bb %}
+                <div class="relative">
+                    <img src="{{b.images.image.url}}" alt="{{b.title}}" class="w-full rounded-lg mb-2 lazyload">
+                    <a href="{% url 'news-detail' b.title %}">
+                        <div onclick="window.open('{% url 'news-detail' b.title %}', '_blank');" class="breaking-overlay rounded-lg cursor-pointer absolute inset-0 bg-black bg-opacity-75 flex flex-col justify-center items-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                            <h3 class="text-2xl font-bold text-center text-white px-4">{{b.title}}</h3>
+                            <p class="text-sm mt-2 text-white">{{b.created_at | date:"M d,Y"}}</p>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+    
+            <!-- Last News -->
+            <div class="bg-[#f4e7cb] p-4 rounded-lg shadow-md">
+                <div class="flex items-center mb-4">
+                    <span class="w-3 h-3 rounded-full bg-[#d8982e] mr-2"></span>
+                    <h2 class="text-xl font-bold text-[#5a3d2b]">LAST NEWS</h2>
+                </div>
+    
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-4">
+                        <img src="https://placehold.co/80x80" alt="Tokyo Image" class="w-16 h-16 rounded-md shadow-sm lazyload">
+                        <div>
+                            <h3 class="font-bold text-sm text-[#5a3d2b]">Tokyo Has Banned Spectators Amidst Covid-19</h3>
+                            <p class="text-xs text-gray-600 flex items-center"><span class="mr-2"><i class="fa fa-calendar"></i></span>July 28, 2021</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <img src="https://placehold.co/80x80" alt="Building Image" class="w-16 h-16 rounded-md shadow-sm lazyload">
+                        <div>
+                            <h3 class="font-bold text-sm text-[#5a3d2b]">Most Infants In 91 Countries Are Suffering From Malnutrition</h3>
+                            <p class="text-xs text-gray-600 flex items-center"><span class="mr-2"><i class="fa fa-calendar"></i></span>July 28, 2021</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content Grid -->
+        <div class="w-full px-4 py-8">
+            <div class="container mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- Left Sidebar -->
+                <aside class="lg:col-span-3 bg-white rounded-lg shadow-lg p-6 w-full">
+                    <div class="flex items-center mb-6">
+                        <span class="w-3 h-3 rounded-full bg-[#d8982e] mr-2"></span>
+                        <h2 class="text-xl font-bold text-[#5a3d2b]">Agriculture</h2>
+                    </div>
+                    {% if breakingnews %}
+                    <div class="space-y-2 overflow-y-scroll">
+                        {% for bn in breakingnews|slice:":3" %}
+                        <div class="group cursor-pointer">
+                            <div class="relative overflow-hidden rounded-lg">
+                                <img src="{{bn.images.image.url}}" alt="{{bn.title}}" class="w-full h-48 object-cover transform transition duration-500 group-hover:scale-110 lazyload">
+                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                                    <h3 class="text-white font-semibold line-clamp-2">{{bn.title}}</h3>
+                                    <p class="text-gray-300 text-sm mt-2">{{bn.created_at | date:"M d, Y" }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </aside>
+
+                <!-- Main Content Area -->
+                <main class="lg:col-span-6 space-y-8 w-full">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                        <div class="relative">
+                            <img src="https://placehold.co/800x400" alt="Featured news" class="w-full h-[400px] object-cover lazyload">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-8">
+                                <span class="bg-[#d8982e] text-white px-4 py-1 rounded-full text-sm">Featured</span>
+                                <h1 class="text-3xl font-bold text-white mt-4">South African Leader Has Been Able To Restore Balance In Most Of The Places</h1>
+                                <div class="flex items-center mt-4 text-gray-300">
+                                    <img src="https://placehold.co/32x32" alt="Author" class="w-8 h-8 rounded-full mr-3">
+                                    <span>By Shadab</span>
+                                    <span class="mx-2">•</span>
+                                    <span>July 29, 2021</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-600 leading-relaxed">
+                                Maecenas arcu nulla, efficitur sit amet gravida a, venenatis sit amet massa. Curabitur eget ex at lacus convallis vehicula. Sed imperdiet dapibus nibh in consequat. Nam tristique metus arcu, vitae ultricies nunc luctus sit amet.
+                            </p>
+                            <button class="mt-6 bg-[#5a3d2b] text-white px-6 py-2 rounded-lg hover:bg-[#3d1f1a] transition duration-300">
+                                Read Full Story
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Latest News Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
+                        {% for post in posts|slice:":4" %}
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
+                            <img src="https://placehold.co/600x400" alt="News thumbnail" class="w-full h-48 object-cover lazyload">
+                            <div class="p-4">
+                                <h3 class="font-bold text-lg text-[#5a3d2b] line-clamp-2">{{post.title}}</h3>
+                                <p class="text-gray-500 text-sm mt-2">{{post.date}}</p>
+                                <p class="text-gray-600 mt-2 line-clamp-3">{{post.excerpt}}</p>
+                                <a href="#" class="inline-block mt-4 text-[#d8982e] hover:text-[#b77924]">Read More →</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </main>
+
+                <!-- Right Sidebar -->
+                <aside class="lg:col-span-3 space-y-8 w-full">
+                    <!-- Trending News -->
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <div class="flex items-center mb-6">
+                            <span class="w-3 h-3 rounded-full bg-[#d8982e] mr-2"></span>
+                            <h2 class="text-xl font-bold text-[#5a3d2b]">TRENDING NOW</h2>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4 group cursor-pointer">
+                                <div class="flex-shrink-0">
+                                    <img src="https://placehold.co/60x60" alt="Trending news" class="w-16 h-16 rounded-lg object-cover lazyload">
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-[#5a3d2b] group-hover:text-[#d8982e] transition duration-300">Covid-19 Has Halted All The Transactions In Venice</h3>
+                                    <p class="text-sm text-gray-500 mt-1">July 29, 2021</p>
+                                </div>
+                            </div>
+                            <!-- More trending items... -->
+                        </div>
+                    </div>
+
+                    <!-- Newsletter Subscription -->
+                    <div class="bg-[#5a3d2b] rounded-lg shadow-lg p-6 text-white">
+                        <h2 class="text-xl font-bold mb-4">Subscribe to Newsletter</h2>
+                        <p class="text-gray-300 mb-4">Stay updated with our latest news and updates</p>
+                        <form class="space-y-4">
+                            <input type="email" placeholder="Enter your email" class="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:border-[#d8982e] text-white placeholder-gray-300">
+                            <button class="w-full bg-[#d8982e] text-white py-2 rounded-lg hover:bg-[#b77924] transition duration-300">
+                                Subscribe Now
+                            </button>
+                        </form>
+                    </div>
+                </aside>
+            </div>
+        </div>
+
+        <!-- Breaking News Carousel -->
+        <div class="bg-gradient-to-r from-[#2a1612] to-[#3d1f1a] py-12 mt-16 mb-12">
+            <div class="container mx-auto px-4 md:px-8">
+                <div class="flex items-center justify-between mb-8">
+                    <div class="flex items-center">
+                        <span class="w-2 h-8 bg-[#d8982e] rounded-full mr-3"></span>
+                        <h2 class="text-2xl md:text-3xl font-bold text-white tracking-wide">Panchayat Breaking</h2>
+                    </div>
+                    <div class="flex space-x-3" id="news-dots"></div>
+                </div>
+                
+                <div class="relative overflow-hidden w-full">
+                    <div class="news-container flex transition-transform duration-500 ease-in-out">
+                        {% for news in breakingnews %}
+                        <div class="news-item flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-3 md:px-4">
+                            <div class="w-full bg-[#f5e3c4] rounded-xl overflow-hidden shadow-xl transform transition duration-300 hover:scale-[1.02] hover:shadow-2xl">
+                                <div class="relative">
+                                    <img src="{{ news.image.url|default:'https://placehold.co/400x250' }}" 
+                                         alt="{{ news.title }}" 
+                                         class="w-full h-52 md:h-56 object-cover">
+                                    <div class="absolute top-4 left-4">
+                                        <span class="bg-[#d8982e] text-white px-3 py-1 rounded-full text-sm font-medium">Latest</span>
+                                    </div>
+                                </div>
+                                <div class="p-5 md:p-6">
+                                    <h3 class="font-bold text-lg md:text-xl text-[#2a1612] mb-3 line-clamp-2 hover:text-[#d8982e] transition-colors">{{ news.title }}</h3>
+                                    <p class="text-[#5a3d2b] text-sm md:text-base line-clamp-3">{{ news.content }}</p>
+                                    <div class="mt-4 flex justify-end">
+                                        <a href="#" class="text-[#d8982e] hover:text-[#b77924] font-medium flex items-center transition-colors">
+                                            Read More 
+                                            <i class="bi bi-arrow-right ml-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <!-- Navigation Arrows -->
+                    <button class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-[#2a1612] p-3 rounded-full shadow-lg opacity-90 hover:opacity-100 transition-all duration-300" id="prev-btn">
+                        <i class="bi bi-chevron-left text-xl"></i>
+                    </button>
+                    <button class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-[#2a1612] p-3 rounded-full shadow-lg opacity-90 hover:opacity-100 transition-all duration-300" id="next-btn">
+                        <i class="bi bi-chevron-right text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const container = document.querySelector('.news-container');
+                const items = document.querySelectorAll('.news-item');
+                const dotsContainer = document.getElementById('news-dots');
+                const prevBtn = document.getElementById('prev-btn');
+                const nextBtn = document.getElementById('next-btn');
+                
+                if (!items.length) return;
+
+                let currentIndex = 0;
+                let autoScrollInterval;
+                
+                // Create navigation dots
+                items.forEach((_, index) => {
+                    const dot = document.createElement('button');
+                    dot.classList.add('w-3', 'h-3', 'rounded-full', 'bg-[#d8982e]', 'opacity-50', 'transition-opacity', 'hover:opacity-75');
+                    dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+                    dot.addEventListener('click', () => {
+                        goToSlide(index);
+                        resetInterval();
+                    });
+                    dotsContainer.appendChild(dot);
+                });
+
+                const dots = dotsContainer.querySelectorAll('button');
+                
+                function updateDots() {
+                    dots.forEach((dot, index) => {
+                        dot.classList.toggle('opacity-100', index === currentIndex);
+                        dot.classList.toggle('opacity-50', index !== currentIndex);
+                    });
+                }
+
+                function goToSlide(index) {
+                    currentIndex = index;
+                    const offset = currentIndex * (100 / items.length);
+                    container.style.transform = `translateX(-${offset}%)`;
+                    updateDots();
+                }
+
+                function nextSlide() {
+                    currentIndex = (currentIndex + 1) % items.length;
+                    goToSlide(currentIndex);
+                }
+
+                function prevSlide() {
+                    currentIndex = (currentIndex - 1 + items.length) % items.length;
+                    goToSlide(currentIndex);
+                }
+
+                function startAutoScroll() {
+                    if (autoScrollInterval) {
+                        clearInterval(autoScrollInterval);
+                    }
+                    autoScrollInterval = setInterval(() => {
+                        nextSlide();
+                    }, 5000);
+                }
+
+                function resetInterval() {
+                    clearInterval(autoScrollInterval);
+                    startAutoScroll();
+                }
+
+                // Event listeners for navigation buttons
+                nextBtn.addEventListener('click', () => {
+                    nextSlide();
+                    resetInterval();
+                });
+
+                prevBtn.addEventListener('click', () => {
+                    prevSlide();
+                    resetInterval();
+                });
+
+                // Initialize first slide and dots
+                goToSlide(0);
+                
+                // Start auto scroll immediately
+                startAutoScroll();
+
+                // Pause auto scroll on hover
+                container.addEventListener('mouseenter', () => {
+                    clearInterval(autoScrollInterval);
+                });
+
+                container.addEventListener('mouseleave', () => {
+                    startAutoScroll();
+                });
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowLeft') {
+                        prevSlide();
+                        resetInterval();
+                    } else if (e.key === 'ArrowRight') {
+                        nextSlide();
+                        resetInterval();
+                    }
+                });
+
+                // Handle visibility change
+                document.addEventListener('visibilitychange', () => {
+                    if (document.hidden) {
+                        clearInterval(autoScrollInterval);
+                    } else {
+                        startAutoScroll();
+                    }
+                });
+            });
+        </script>
+
+        <style>
+            .news-container {
+                display: flex;
+                transition: transform 0.5s ease-in-out;
+            }
+
+            .news-item {
+                flex: 0 0 auto;
+            }
+
+            @media (max-width: 768px) {
+                .news-item {
+                    width: 100%;
+                }
+            }
+
+            #prev-btn, #next-btn {
+                display: none;
+            }
+
+            @media (min-width: 768px) {
+                #prev-btn, #next-btn {
+                    display: block;
+                }
+            }
+        </style>
+
+        <!-- Social Media Section -->
+        <div class="container mx-auto px-4 py-12">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-[#5a3d2b]">FOLLOW US</h2>
+                <div class="w-24 h-1 bg-[#d8982e] mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {% for platform in social_media %}
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-[#5a3d2b] mb-4">{{platform.name}}</h3>
+                        <div class="space-y-4">
+                            {% for post in platform.posts %}
+                            <div class="border-b border-gray-200 pb-4 last:border-0">
+                                <img src="{{post.image_url}}" alt="Social media post" class="w-full rounded-lg mb-3 lazyload">
+                                <p class="text-gray-600">{{post.content}}</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <a href="{{platform.profile_url}}" class="inline-block mt-6 text-[#d8982e] hover:text-[#b77924]">
+                            Follow on {{platform.name}} →
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+    <footer class="bg-[#35231e] text-[#efe6d4]">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <!-- About Section -->
+                <div class="space-y-4">
+                    <div class="flex justify-start">
+                        <img src="media/images/panchayat_sandesh_logo.png" alt="Logo" class="h-16">
+                    </div>
+                    <p class="text-sm leading-relaxed text-left">
+                        Panchayat Sandesh is the official magazine of the All India Panchayat Parishad, dedicated to empowering local governance and rural development.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-left">Quick Links</h3>
+                    <ul class="space-y-2 text-left">
+                        <li><a href="{% url 'home' %}" class="hover:text-[#d8982e] transition-colors duration-300">Home</a></li>
+                        <li><a href="{% url 'about-us' %}" class="hover:text-[#d8982e] transition-colors duration-300">About Us</a></li>
+                        <li><a href="{% url 'categories' %}" class="hover:text-[#d8982e] transition-colors duration-300">Categories</a></li>
+                        <li><a href="{% url 'team' %}" class="hover:text-[#d8982e] transition-colors duration-300">Our Team</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-left">Contact Us</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center gap-2">
+                            <i class="bi bi-geo-alt"></i>
+                            <span>Jasidih, Bihar, India</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="bi bi-envelope"></i>
+                            <a href="mailto:contact@panchayatsandesh.com" class="hover:text-[#d8982e] transition-colors duration-300">contact@panchayatsandesh.com</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="bi bi-telephone"></i>
+                            <a href="tel:+911234567890" class="hover:text-[#d8982e] transition-colors duration-300">+91 123 456 7890</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Social Media & Newsletter -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-left">Connect With Us</h3>
+                    <div class="flex justify-start space-x-4">
+                        <a href="#" class="bg-[#d8982e] hover:bg-[#b77924] p-2 rounded-full transition-colors duration-300">
+                            <i class="bi bi-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="bg-[#d8982e] hover:bg-[#b77924] p-2 rounded-full transition-colors duration-300">
+                            <i class="bi bi-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="bg-[#d8982e] hover:bg-[#b77924] p-2 rounded-full transition-colors duration-300">
+                            <i class="bi bi-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="bg-[#d8982e] hover:bg-[#b77924] p-2 rounded-full transition-colors duration-300">
+                            <i class="bi bi-linkedin text-xl"></i>
+                        </a>
+                    </div>
+                    <div class="mt-6">
+                        <h4 class="text-lg font-semibold mb-2 text-left">Subscribe to Newsletter</h4>
+                        <form class="flex flex-col sm:flex-row gap-2">
+                            <input type="email" placeholder="Enter your email" class="w-full px-4 py-2 rounded-lg bg-[#2a1c17] border border-[#4a332c] focus:outline-none focus:border-[#d8982e]">
+                            <button type="submit" class="w-full sm:w-auto bg-[#d8982e] hover:bg-[#b77924] px-6 py-2 rounded-lg transition-colors duration-300">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="pt-8 mt-8 border-t border-[#4a332c]">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <p class="text-sm">&copy; 2024 Panchayat Sandesh. All rights reserved.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 text-sm">
+                        <a href="#" class="hover:text-[#d8982e] transition-colors duration-300">Privacy Policy</a>
+                        <span class="hidden sm:inline">|</span>
+                        <a href="#" class="hover:text-[#d8982e] transition-colors duration-300">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'js/script.js' %}?v=2"></script>
+</body>
+</html>

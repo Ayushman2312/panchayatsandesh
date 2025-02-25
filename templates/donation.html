@@ -1,0 +1,354 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Cache-Control" content="max-age=3600, public">
+        <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; img-src 'self' data:; object-src 'none';">
+        {% comment %} <meta http-equiv="Set-Cookie" content="HttpOnly; Secure; SameSite=Strict"> {% endcomment %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" async></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js"></script>
+        <title>Donate - Panchayat Sandesh</title>
+        <link rel="icon" href="/media/images/panchayat_sandesh_logo.png" type="image/x-icon">
+</head>
+<body class="bg-[#f5e3c4] text-[#5a3d2b]">
+        <!-- Top Info Bar -->
+        <div class="bg-[#2a1612] text-[#efe6d4] text-sm hidden md:block">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row justify-between items-center py-2">
+                    <!-- Contact Info -->
+                    <div class="flex flex-col md:flex-row items-center md:space-x-6 space-y-2 md:space-y-0 mb-3 md:mb-0 w-full md:w-auto">
+                        <a href="mailto:contact@panchayatsandesh.com" class="flex items-center hover:text-[#d8982e] transition-colors duration-300 w-full md:w-auto justify-center">
+                            <i class="bi bi-envelope mr-2"></i>
+                            <span>contact@panchayatsandesh.com</span>
+                        </a>
+                        <a href="tel:+911234567890" class="flex items-center hover:text-[#d8982e] transition-colors duration-300 w-full md:w-auto justify-center">
+                            <i class="bi bi-telephone mr-2"></i>
+                            <span>+91 123 456 7890</span>
+                        </a>
+                    </div>
+    
+                    <!-- Right Section -->
+                    <div class="flex flex-col md:flex-row items-center md:space-x-6 space-y-3 md:space-y-0 w-full md:w-auto">
+                        <!-- Breaking News -->
+                        <div class="hidden md:flex items-center">
+                            <span class="bg-[#d8982e] text-white px-2 py-0.5 rounded-sm text-xs font-bold mr-2">LIVE</span>
+                            <span class="text-[#d8982e]">Breaking News:</span>
+                            <span class="ml-2 truncate max-w-md">Latest updates on rural development initiatives across India</span>
+                        </div>
+    
+                        <!-- Social Links -->
+                        <div class="flex items-center space-x-6 justify-center w-full md:w-auto">
+                            <a href="#" class="hover:text-[#d8982e] transition-colors duration-300 text-xl md:text-base">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+                            <a href="#" class="hover:text-[#d8982e] transition-colors duration-300 text-xl md:text-base">
+                                <i class="bi bi-twitter"></i>
+                            </a>
+                            <a href="#" class="hover:text-[#d8982e] transition-colors duration-300 text-xl md:text-base">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <header class="sticky top-0 z-50 w-full">
+            <!-- Top Bar -->
+            <div class="bg-[#3d1f1a] text-white">
+                <div class="container mx-auto px-4 py-2 md:py-3">
+                    <div class="flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0">
+                        <!-- Left Section -->
+                        <div class="hidden md:block text-base md:text-lg lg:text-xl font-bold tracking-wide animate__animated animate__fadeInLeft">
+                            <span class="hidden md:inline">THE</span> PANCHAYAT SANDESH
+                        </div>
+    
+                        <!-- Center Logo -->
+                        <div class="absolute left-1/2 transform -translate-x-1/2 hidden md:block">
+                            <div class="animate__animated animate__fadeInDown">
+                                <img src="/media/images/panchayat_sandesh_logo.png" 
+                                     alt="THE PANCHAYATSANDESH" 
+                                     class="h-10 md:h-12 lg:h-14 object-contain lazyload"
+                                     loading="lazy">
+                            </div>
+                        </div>
+    
+                        <!-- Mobile Logo and Subscribe Button Container -->
+                        <div class="w-full md:hidden flex justify-between items-center">
+                            <!-- Logo -->
+                            <div class="animate__animated animate__fadeInDown">
+                                <img src="/media/images/panchayat_sandesh_logo.png" 
+                                     alt="THE PANCHAYATSANDESH" 
+                                     class="h-8 object-contain lazyload"
+                                     loading="lazy">
+                            </div>
+    
+                            <!-- Subscribe Button -->
+                            <div class="animate__animated animate__fadeInRight">
+                                <a href="{% url 'subscribe' %}" 
+                                   class="inline-block bg-[#73594a] hover:bg-[#5a4437] px-3 py-1.5 rounded-lg transition-all duration-300 text-xs font-medium transform hover:scale-105">
+                                    SUBSCRIBE NOW
+                                </a>
+                            </div>
+                        </div>
+    
+                        <!-- Right Section (Subscribe Button) -->
+                        <div class="hidden md:block animate__animated animate__fadeInRight">
+                            <a href="{% url 'subscribe' %}" 
+                               class="inline-block bg-[#73594a] hover:bg-[#5a4437] px-6 py-2 rounded-lg transition-all duration-300 text-base font-medium transform hover:scale-105">
+                                SUBSCRIBE NOW
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Navigation -->
+            <nav class="bg-[#f5e3c4] shadow-lg">
+                <div class="container mx-auto px-4">
+                    <!-- Desktop Navigation -->
+                    <div class="hidden md:block">
+                        <ul class="flex justify-center items-center space-x-4 lg:space-x-8 py-4">
+                            <li class="group">
+                                <a href="{% url 'home' %}" class="text-sm lg:text-base font-semibold tracking-wide hover:text-[#d8982e] transition-colors duration-300 relative py-2">
+                                    HOME
+                                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-[#d8982e] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                                </a>
+                            </li>
+                            <li class="group">
+                                <a href="{% url 'about-us' %}" class="text-sm lg:text-base font-semibold tracking-wide hover:text-[#d8982e] transition-colors duration-300 relative py-2">
+                                    ABOUT US
+                                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-[#d8982e] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                                </a>
+                            </li>
+                            <li class="group">
+                                <a href="{% url 'categories' %}" class="text-sm lg:text-base font-semibold tracking-wide hover:text-[#d8982e] transition-colors duration-300 relative py-2">
+                                    CATEGORIES
+                                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-[#d8982e] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                                </a>
+                            </li>
+                            <li class="group">
+                                <a href="{% url 'team' %}" class="text-sm lg:text-base font-semibold tracking-wide hover:text-[#d8982e] transition-colors duration-300 relative py-2">
+                                    TEAM
+                                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-[#d8982e] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                                </a>
+                            </li>
+                            <li class="group">
+                                <a href="{% url 'upcoming-events' %}" class="text-sm lg:text-base font-semibold tracking-wide hover:text-[#d8982e] transition-colors duration-300 relative py-2">
+                                    UPCOMING EVENTS
+                                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-[#d8982e] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                                </a>
+                            </li>
+                            <li class="group">
+                                <a href="{% url 'gallery' %}" class="text-sm lg:text-base font-semibold tracking-wide hover:text-[#d8982e] transition-colors duration-300 relative py-2">
+                                    GALLERY
+                                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-[#d8982e] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                                </a>
+                            </li>
+                            <li class="group">
+                                <a href="{% url 'donation' %}" class="text-sm lg:text-base font-semibold tracking-wide hover:text-[#d8982e] transition-colors duration-300 relative py-2">
+                                    DONATE
+                                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-[#d8982e] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+    
+                    <!-- Mobile Navigation -->
+                    <div class="md:hidden relative py-3">
+                        <button class="menu-toggle w-full flex items-center justify-between px-4 py-2 focus:outline-none">
+                            <span class="text-lg font-semibold">Menu</span>
+                            <i class="bi bi-list text-2xl"></i>
+                        </button>
+                        <ul class="mobile-nav absolute top-full left-0 right-0 bg-white shadow-xl rounded-b-xl overflow-hidden max-h-0 opacity-0 transition-all duration-300">
+                            <li>
+                                <a href="{% url 'home' %}" class="block px-6 py-3 hover:bg-[#f5e3c4] transition-colors duration-200 text-sm font-medium">
+                                    HOME
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'about-us' %}" class="block px-6 py-3 hover:bg-[#f5e3c4] transition-colors duration-200 text-sm font-medium">
+                                    ABOUT US
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'categories' %}" class="block px-6 py-3 hover:bg-[#f5e3c4] transition-colors duration-200 text-sm font-medium">
+                                    CATEGORIES
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'team' %}" class="block px-6 py-3 hover:bg-[#f5e3c4] transition-colors duration-200 text-sm font-medium">
+                                    TEAM
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'upcoming-events' %}" class="block px-6 py-3 hover:bg-[#f5e3c4] transition-colors duration-200 text-sm font-medium">
+                                    UPCOMING EVENTS
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'gallery' %}" class="block px-6 py-3 hover:bg-[#f5e3c4] transition-colors duration-200 text-sm font-medium">
+                                    GALLERY
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'donation' %}" class="block px-6 py-3 hover:bg-[#f5e3c4] transition-colors duration-200 text-sm font-medium">
+                                    DONATE
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    <div class="flex flex-col items-center justify-center py-16 px-4 bg-gradient-to-b from-[#f5e3c4] to-[#efe6d4]">
+        <div class="text-center mb-12 animate__animated animate__fadeInDown">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#2a1612] mb-4" style="font-family: 'Merriweather', serif;">Support Our Mission</h1>
+            <div class="w-24 h-1 bg-[#d8982e] mx-auto mb-4"></div>
+            <p class="text-lg text-[#5a3d2b] max-w-2xl mx-auto">Your contribution helps us continue our work in empowering local governance and rural development across India.</p>
+        </div>
+    <div class="max-w-xl w-full bg-white p-10 rounded-2xl shadow-[0_20px_50px_rgba(42,22,18,0.1)] animate__animated animate__zoomIn">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-[#2a1612] mb-3" style="font-family: 'Merriweather', serif;">Make a Donation</h1>
+            <div class="w-16 h-1 bg-[#d8982e] mx-auto"></div>
+        </div>
+
+        <form onsubmit="openUPI(); return false;" method="post" action="{% url 'donation' %}" class="space-y-6">
+            {% csrf_token %}
+            
+            <div class="space-y-2">
+                <label for="name" class="block text-sm font-medium text-[#5a3d2b]">Full Name</label>
+                <input type="text" id="name" name="name" 
+                    class="w-full px-4 py-3 rounded-lg border border-[#e0d5c4] focus:border-[#d8982e] focus:ring focus:ring-[#d8982e]/20 focus:outline-none transition-colors duration-200"
+                    placeholder="Enter your full name" required>
+            </div>
+
+            <div class="space-y-2">
+                <label for="mobile" class="block text-sm font-medium text-[#5a3d2b]">Mobile Number</label>
+                <input type="tel" id="mobile" name="mobile" 
+                    class="w-full px-4 py-3 rounded-lg border border-[#e0d5c4] focus:border-[#d8982e] focus:ring focus:ring-[#d8982e]/20 focus:outline-none transition-colors duration-200"
+                    placeholder="Enter your mobile number" required>
+            </div>
+
+            <div class="space-y-2">
+                <label for="email" class="block text-sm font-medium text-[#5a3d2b]">Email Address</label>
+                <input type="email" id="email" name="email" 
+                    class="w-full px-4 py-3 rounded-lg border border-[#e0d5c4] focus:border-[#d8982e] focus:ring focus:ring-[#d8982e]/20 focus:outline-none transition-colors duration-200"
+                    placeholder="Enter your email address" required>
+            </div>
+
+            <div class="space-y-2">
+                <label for="amount" class="block text-sm font-medium text-[#5a3d2b]">Donation Amount (₹)</label>
+                <div class="relative">
+                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">₹</span>
+                    <input type="number" id="amount" name="amount" 
+                        class="w-full pl-8 pr-4 py-3 rounded-lg border border-[#e0d5c4] focus:border-[#d8982e] focus:ring focus:ring-[#d8982e]/20 focus:outline-none transition-colors duration-200"
+                        placeholder="Enter amount" required>
+                </div>
+            </div>
+
+            <div class="pt-4">
+                <button type="submit" 
+                    class="w-full bg-[#d8982e] hover:bg-[#b77924] text-white font-medium py-4 rounded-lg transition-colors duration-300 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2">
+                    <i class="bi bi-phone text-xl"></i>
+                    <span>Donate via UPI</span>
+                </button>
+            </div>
+
+            <p class="text-center text-sm text-[#5a3d2b] mt-6">
+                Your donation is secure and encrypted. By donating, you agree to our <a href="#" class="text-[#d8982e] hover:underline">Terms of Service</a>
+            </p>
+        </form>
+    </div>
+</div>
+<footer class="bg-[#35231e] text-[#efe6d4]">
+    <div class="container mx-auto px-4 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            <!-- About Section -->
+            <div class="space-y-4">
+                <div class="flex justify-start">
+                    <img src="media/images/panchayat_sandesh_logo.png" alt="Logo" class="h-16">
+                </div>
+                <p class="text-sm leading-relaxed text-left">
+                    Panchayat Sandesh is the official magazine of the All India Panchayat Parishad, dedicated to empowering local governance and rural development.
+                </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="space-y-4">
+                <h3 class="text-xl font-bold text-left">Quick Links</h3>
+                <ul class="space-y-2 text-left">
+                    <li><a href="{% url 'home' %}" class="hover:text-[#d8982e] transition-colors duration-300">Home</a></li>
+                    <li><a href="{% url 'about-us' %}" class="hover:text-[#d8982e] transition-colors duration-300">About Us</a></li>
+                    <li><a href="{% url 'categories' %}" class="hover:text-[#d8982e] transition-colors duration-300">Categories</a></li>
+                    <li><a href="{% url 'team' %}" class="hover:text-[#d8982e] transition-colors duration-300">Our Team</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="space-y-4">
+                <h3 class="text-xl font-bold text-left">Contact Us</h3>
+                <ul class="space-y-2">
+                    <li class="flex items-center gap-2">
+                        <i class="bi bi-geo-alt"></i>
+                        <span>Jasidih, Bihar, India</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i class="bi bi-envelope"></i>
+                        <a href="mailto:contact@panchayatsandesh.com" class="hover:text-[#d8982e] transition-colors duration-300">contact@panchayatsandesh.com</a>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i class="bi bi-telephone"></i>
+                        <a href="tel:+911234567890" class="hover:text-[#d8982e] transition-colors duration-300">+91 123 456 7890</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Social Media & Newsletter -->
+            <div class="space-y-4">
+                <h3 class="text-xl font-bold text-left">Connect With Us</h3>
+                <div class="flex justify-start space-x-4">
+                    <a href="#" class="bg-[#d8982e] hover:bg-[#b77924] p-2 rounded-full transition-colors duration-300">
+                        <i class="bi bi-facebook text-xl"></i>
+                    </a>
+                    <a href="#" class="bg-[#d8982e] hover:bg-[#b77924] p-2 rounded-full transition-colors duration-300">
+                        <i class="bi bi-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="bg-[#d8982e] hover:bg-[#b77924] p-2 rounded-full transition-colors duration-300">
+                        <i class="bi bi-instagram text-xl"></i>
+                    </a>
+                    <a href="#" class="bg-[#d8982e] hover:bg-[#b77924] p-2 rounded-full transition-colors duration-300">
+                        <i class="bi bi-linkedin text-xl"></i>
+                    </a>
+                </div>
+                <div class="mt-6">
+                    <h4 class="text-lg font-semibold mb-2 text-left">Subscribe to Newsletter</h4>
+                    <form class="flex flex-col sm:flex-row gap-2">
+                        <input type="email" placeholder="Enter your email" class="w-full px-4 py-2 rounded-lg bg-[#2a1c17] border border-[#4a332c] focus:outline-none focus:border-[#d8982e]">
+                        <button type="submit" class="w-full sm:w-auto bg-[#d8982e] hover:bg-[#b77924] px-6 py-2 rounded-lg transition-colors duration-300">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="pt-8 mt-8 border-t border-[#4a332c]">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <p class="text-sm">&copy; 2024 Panchayat Sandesh. All rights reserved.</p>
+                <div class="flex flex-col sm:flex-row gap-4 text-sm">
+                    <a href="#" class="hover:text-[#d8982e] transition-colors duration-300">Privacy Policy</a>
+                    <span class="hidden sm:inline">|</span>
+                    <a href="#" class="hover:text-[#d8982e] transition-colors duration-300">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="{% static 'js/script.js' %}?v=2"></script>
+</body>
+</html>

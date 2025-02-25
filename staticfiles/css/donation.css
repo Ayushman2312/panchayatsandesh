@@ -1,0 +1,141 @@
+/* Basic Styles */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    animation-duration: 5s;
+}
+body {
+    /* font-family: Arial, sans-serif; */
+    margin: 0;
+    padding: 0;
+    background-color: #f5e3c4;
+    color: var(--text-color);
+}
+/* Basic Styles */
+.header {
+    background-color: #3d1f1a;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:10px 20px;
+
+}
+
+.header .left-section {
+    font-size: 18px;
+}
+
+.header .middle-section img {
+    height:60px;
+}
+
+.header .right-section {
+    background-color: #73594a;
+    padding: 10px 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 840px) {
+    .header .left-section {
+        display: none;
+    }
+    .header .middle-section img{
+        height: 40px;
+    }
+}
+.subscribe{
+    color: white;
+    text-decoration: none;
+}
+
+/* Navbar Styles */
+.navbar a:hover{
+    color: yellow;
+}
+hr{
+    border: none;
+    background-color: rgb(53, 52, 52);
+    height: 1px;
+}
+.desktop-nav li{
+    display: inline;
+    margin: 1.7rem;
+}
+.desktop-nav a{
+    text-decoration: none;
+    color: white;
+}
+.desktop-nav{
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    background-color: #3d1f1a;
+    font-style: normal;
+    padding: 1rem 4rem;
+
+}
+.navbar {
+    text-align: center;
+}
+.mobile-nav {
+    display: none;
+    list-style: none;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    background-color: #3d1f1a;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+.desktop-nav li:first-child a{
+    color: yellow;
+}
+.mobile-nav.active {
+    display: block;
+}
+
+.mobile-nav a {
+    text-decoration: none;
+    color: white; /* Ensure links are white for visibility */
+    padding: 10px 20px;
+}
+.mobile-nav a:focus li{
+    background-color: yellow;
+}
+.menu-toggle{
+    display: none;
+}
+.menu-toggle i {
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+@media screen and (max-width: 1025px) {
+    .mobile-nav {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .menu-toggle {
+        background-color: #3d1f1a;
+        display: block;
+    }
+
+    .desktop-nav {
+        display: none;
+    }
+}
+:root {
+    --bg-color: #f3e6ca; /* Light Beige */
+    --text-color: #5a3d2b; /* Dark Brown */
+    --accent-color: #f4e7cb; /* Soft Cream */
+    --button-color: #d8982e; /* Golden Orange */
+    --button-hover-color: #b77924; /* Burnt Orange */
+}

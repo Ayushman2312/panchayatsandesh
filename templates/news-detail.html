@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Cache-Control" content="max-age=3600, public">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; img-src 'self' data:; object-src 'none';">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ news.title }} - Panchayat Sandesh</title>
+    <link rel="stylesheet" href="{% static 'css/news-details.css' %}?v=1">
+</head>
+<body>
+    <header>
+        <div class="header">
+            <div class="left-section animate__animated animate__fadeInLeft">PANCHAYAT SANDESH</div>
+            <div class="middle-section animate__animated animate__fadeInDown lazyload">
+                <img src="media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYATSANDESH">
+            </div>
+            <div class="right-section animate__animated animate__fadeInRight">SUBSCRIBE</div>
+        </div>
+        <hr>
+        <nav class="navbar">
+            <ul class="desktop-nav">
+                <li class="animate__animated animate__zoomIn"><a href="{% url 'home' %}">HOME</a></li>
+                <li><a href="{% url 'about-us' %}">ABOUT US</a></li>
+                <li><a href="{% url 'categories' %}">CATEGORIES</a></li>
+                <li><a href="{% url 'team' %}">TEAM</a></li>
+                <li><a href="{% url 'upcoming-events' %}">UPCOMING EVENTS</a></li>
+                <li><a href="{% url 'gallery' %}">GALLERY</a></li>
+                <li><a href="{% url 'donation' %}">DONATE</a></li>
+            </ul>
+            <ul class="mobile-nav">
+                <li><a href="{% url 'home' %}">HOME</a></li>
+                <li><a href="{% url 'about-us' %}">ABOUT US</a></li>
+                <li><a href="{% url 'categories' %}">CATEGORIES</a></li>
+                <li><a href="{% url 'team' %}">TEAM</a></li>
+                <li><a href="{% url 'upcoming-events' %}">UPCOMING EVENTS</a></li>
+                <li><a href="{% url 'gallery' %}">GALLERY</a></li>
+                <li><a href="{% url 'donation' %}">DONATE</a></li>
+            </ul>
+            <div class="menu-toggle active">
+                <i class="bi bi-list"></i>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="news-header">
+            <h1>{{ news.title }}</h1>
+            <div class="news-meta">
+                <span>By {{ news.author }}</span>
+                <span>Published on {{ news.created_at|date:"F j, Y" }}</span>
+                <span>Category: {{ category }}</span>
+            </div>
+        </div>
+
+        {% if news %}
+            <img src="{{ news.images.image.url }}" alt="{{ news.title }}" class="news-image">
+        {% endif %}
+
+        <div class="news-content">
+            <p>{{ news.content }}</p>
+
+            {% if news.additional_section %}
+                <h2>{{ news.additional_section_title }}</h2>
+                <p>{{ news.additional_section_content }}</p>
+            {% endif %}
+        </div>
+
+        <a href="{% url 'home' %}" class="back-link">← Back to Home</a>
+    </div>
+    <script src="{% static 'js/script.js' %}?v=1"></script>
+</body>
+</html>

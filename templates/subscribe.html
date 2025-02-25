@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Cache-Control" content="max-age=3600, public">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; img-src 'self' data:; object-src 'none';">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribe</title>
+    <link rel="stylesheet" href="{% static 'css/subscribe.css' %}?v=1">
+</head>
+<body>
+    <div class="container">
+        <div class="subscription-box">
+            <h1>Subscribe to Our Newsletter</h1>
+            <p>Stay updated with the latest news and offers!</p>
+            <form method="post" action="{% url 'subscribe' %}">
+                {% csrf_token %}
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

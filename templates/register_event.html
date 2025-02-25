@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Cache-Control" content="max-age=3600, public">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; img-src 'self' data:; object-src 'none';">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+    <title>Register for {{ event.event_name }}</title>
+</head>
+<body class="bg-gradient-to-br from-[#f5e3c4] to-[#efe6d4] min-h-screen">
+    <div class="container mx-auto px-2 sm:px-4 py-8 sm:py-12 md:py-20">
+        <div class="max-w-4xl mx-auto">
+            <!-- Event Card -->
+            <div class="bg-white rounded-2xl sm:rounded-3xl shadow-xl sm:shadow-2xl overflow-hidden mb-8 sm:mb-12 animate__animated animate__fadeInDown">
+                <div class="relative h-36 sm:h-48 md:h-64 overflow-hidden">
+                    {% if event.image %}
+                    <img src="{{ event.image.url }}" alt="{{ event.event_name }}" class="w-full h-full object-cover">
+                    {% else %}
+                    <div class="w-full h-full bg-[#d8982e] flex items-center justify-center">
+                        <i class="bi bi-calendar-event text-4xl sm:text-6xl text-white"></i>
+                    </div>
+                    {% endif %}
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div class="absolute bottom-3 sm:bottom-4 left-4 sm:left-6">
+                        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2" style="font-family: 'Merriweather', serif;">
+                            {{ event.event_name }}
+                        </h1>
+                        <div class="flex items-center space-x-3 sm:space-x-4">
+                            <span class="bg-[#d8982e] text-white px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs sm:text-sm font-medium">
+                                <i class="bi bi-calendar3 mr-1 sm:mr-2"></i>{{ event.date|date:"M d, Y" }}
+                            </span>
+                            <span class="text-white text-xs sm:text-sm">
+                                <i class="bi bi-people-fill mr-1 sm:mr-2"></i>{{ event.no_of_registers }} Registered
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-4 sm:p-6 md:p-8">
+                    <p class="text-base sm:text-lg text-[#5a3d2b] mb-4 sm:mb-6">{{ event.event_description }}</p>
+                </div>
+            </div>
+
+            <!-- Registration Form -->
+            <div class="bg-white rounded-2xl sm:rounded-3xl shadow-xl sm:shadow-2xl overflow-hidden animate__animated animate__fadeInUp">
+                <div class="p-4 sm:p-6 md:p-8">
+                    <h2 class="text-xl sm:text-2xl font-bold text-[#2a1612] mb-4 sm:mb-6 text-center" style="font-family: 'Merriweather', serif;">
+                        Registration Form
+                    </h2>
+
+                    {% if messages %}
+                    <div class="mb-4 sm:mb-6">
+                        {% for message in messages %}
+                        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-3 sm:p-4 rounded-lg animate__animated animate__shakeX" role="alert">
+                            <p class="text-sm sm:text-base font-medium">{{ message }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <form method="post" class="space-y-4 sm:space-y-6">
+                        {% csrf_token %}
+                        <div class="group">
+                            <label for="name" class="block text-xs sm:text-sm font-medium text-[#5a3d2b] mb-1.5 sm:mb-2">Full Name</label>
+                            <div class="relative">
+                                <i class="bi bi-person absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                <input type="text" id="name" name="name" required 
+                                    class="w-full pl-10 pr-4 py-2.5 sm:py-3 text-sm sm:text-base border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#d8982e] focus:border-transparent transition-all duration-300"
+                                    placeholder="Enter your full name">
+                            </div>
+                        </div>
+
+                        <div class="group">
+                            <label for="email" class="block text-xs sm:text-sm font-medium text-[#5a3d2b] mb-1.5 sm:mb-2">Email Address</label>
+                            <div class="relative">
+                                <i class="bi bi-envelope absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                <input type="email" id="email" name="email" required 
+                                    class="w-full pl-10 pr-4 py-2.5 sm:py-3 text-sm sm:text-base border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#d8982e] focus:border-transparent transition-all duration-300"
+                                    placeholder="Enter your email address">
+                            </div>
+                        </div>
+
+                        <div class="flex justify-center pt-3 sm:pt-4">
+                            <button type="submit" 
+                                class="inline-flex items-center px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base bg-[#d8982e] hover:bg-[#b77924] text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#d8982e]">
+                                <i class="bi bi-check2-circle mr-2"></i>
+                                Complete Registration
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Back Button -->
+            <div class="mt-6 sm:mt-8 text-center">
+                <a href="{% url 'upcoming-events' %}" 
+                    class="inline-flex items-center text-sm sm:text-base text-[#5a3d2b] hover:text-[#d8982e] transition-colors duration-300">
+                    <i class="bi bi-arrow-left mr-2"></i>
+                    Back to Events
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
