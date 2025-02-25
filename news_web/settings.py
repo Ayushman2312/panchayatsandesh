@@ -77,12 +77,12 @@ WSGI_APPLICATION = 'news_web.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'panchayatsandesh',
-        'USER':'postgres',
-        'PASSWORD':'Ayushman@2312',
-        'HOST':'localhost',
-        'PORT':'5432',
+        'USER': 'ayushman',
+        'PASSWORD': 'Ayushman@23122003',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
