@@ -208,7 +208,7 @@
     </header>
     
     <main class="min-h-screen">
-        <div  class="w-full block" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/media/home_banner_1.jpg'); background-size: cover; background-position: center; height: 50vh;">
+        <div class="w-full hidden lg:block" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/media/home_banner_1.jpg'); background-size: cover; background-position: center;">
             <div class="container mx-auto px-4 py-8">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8" style="min-height: 300px;">
                     <div class="rounded-xl shadow-lg p-4 animate__animated animate__fadeInLeft animate__delay-1s transform hover:scale-[1.02] transition-transform duration-300 max-w-md">
@@ -238,7 +238,7 @@
             </div>
         </div>
 
-        {% comment %}<div class="w-full md:hidden" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/media/mobile-home-banner.jpg'); background-size: cover; background-position: center;">
+        <div class="w-full md:hidden" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/media/mobile-home-banner.jpg'); background-size: cover; background-position: center;">
             <div class="container mx-auto px-4 py-6">
                 <div class="grid grid-cols-1 gap-6 mb-8" style="min-height: 250px;">
                     <div class="rounded-xl shadow-lg p-4 animate__animated animate__fadeInLeft animate__delay-1s transform hover:scale-[1.02] transition-transform duration-300">
@@ -266,7 +266,7 @@
                     </div>
                 </div>
             </div>
-        </div>{% endcomment %}
+        </div>
 
         <div class="w-full h-16 bg-white/50 backdrop-blur-sm overflow-hidden">
             <div id="scrollContainer" class="relative flex items-center h-full">
