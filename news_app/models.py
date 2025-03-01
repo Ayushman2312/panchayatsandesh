@@ -38,6 +38,7 @@ class Article(models.Model):
     featured_image = models.ImageField(upload_to='media/images')
     status = models.CharField(max_length = 100, choices = STATUS)
     category = models.ForeignKey(Category, on_delete = models.CASCADE)
+    created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.title
