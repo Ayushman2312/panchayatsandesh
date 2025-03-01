@@ -5,7 +5,30 @@ from .models import *
 from django.http import HttpResponse
 from django.contrib import messages
 from django.views import View
+from django.contrib.auth.hashers import check_password
 
+import logging
+
+# Configure logger
+logger = logging.getLogger(__name__)
+
+def Login(request):
+    if request.method=="POST":
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        try:
+            user_obj = User.objects.get(email=email)
+            password_check = check_password(password, user_obj.password)
+            if password_check:
+                request.session['user_id'] = str(user_obj.user_id)
+                return redirect('messages')
+            else:
+                messages.error(request, 'Wrong password')
+                return redirect('panchayatuser')
+        except User.DoesNotExist:
+            messages.info(request, 'Email does not exist')
+            return redirect('panchayatuser')
+    return render(request, 'login.html')
 
 class HomeView(TemplateView):
     template_name = 'home.html'
@@ -36,6 +59,7 @@ class HomeView(TemplateView):
             news_by_category[category] = Article.objects.filter(category=category).order_by('-created_at')
         context["news_by_category"] = news_by_category
         return context
+    
     
 class CategoryView(TemplateView):
     template_name = "categories.html"
@@ -228,7 +252,7 @@ class CategoryNewsView(TemplateView):
         category_name = self.kwargs.get('category_name')
         category = get_object_or_404(Category, name=category_name)
         articles = Article.objects.filter(category=category)
-        main_article = Article.objects.order_by('-published_at')[:1]
+        main_article = Article.objects.order_by('-created_at')[:1]
         context['category'] = category
         context['articles'] = articles
         return context
@@ -248,3 +272,137 @@ class DonationView(TemplateView):
         return self.get(request, *args, **kwargs)
         
 
+class CommunicationView(TemplateView):
+    template_name = 'communicate.html'
+
+    def get_context_data(self, **kwargs):
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.debug("Entering CommunicationView.get_context_data")
+        
+        context = super().get_context_data(**kwargs)
+        
+        logger.debug("Returning context from CommunicationView.get_context_data")
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.debug("Entering CommunicationView.post")
+        
+        whatsapp_number = request.POST.get('whatsapp_number')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        
+        logger.debug(f"Received form data - WhatsApp: {whatsapp_number}, Email: {email}, Message length: {len(message) if message else 0}")
+        
+        if whatsapp_number and email and message:
+            try:
+                # Create a new communication record
+                logger.debug("Creating new communication record")
+                comm = communication.objects.create(
+                    whatsapp_number=whatsapp_number,
+                    email=email,
+                    message=message
+                )
+                logger.debug(f"Communication record created with ID: {comm.id}")
+                
+                messages.success(request, 'Your message has been sent successfully!')
+                logger.debug("Redirecting to home page after successful submission")
+                return redirect('home')
+            except Exception as e:
+                logger.error(f"Error creating communication record: {str(e)}")
+                messages.error(request, 'An error occurred while sending your message.')
+                return self.get(request, *args, **kwargs)
+        else:
+            logger.warning("Form submission missing required fields")
+            messages.error(request, 'Please fill all required fields.')
+            return self.get(request, *args, **kwargs)
+
+class MessagesView(TemplateView):
+    template_name = 'messages.html'
+    
+    def get_context_data(self, **kwargs):
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.debug("Entering MessagesView.get_context_data")
+        
+        context = super().get_context_data(**kwargs)
+        
+        # Get all communications
+        logger.debug("Fetching all communications ordered by creation date")
+        communications_list = communication.objects.all().order_by('-created_at')
+        logger.debug(f"Retrieved {communications_list.count()} communication records")
+        
+        context['communications'] = communications_list
+        # context['message'] =
+        
+        logger.debug("Returning context from MessagesView.get_context_data")
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.debug("Entering MessagesView.post")
+        
+        communication_id = request.POST.get('communication_id')
+        response_message = request.POST.get('response')
+        
+        logger.debug(f"Processing response for communication ID: {communication_id}")
+        logger.debug(f"Response message length: {len(response_message) if response_message else 0}")
+        
+        if communication_id and response_message:
+            try:
+                # Get the communication object
+                logger.debug(f"Retrieving communication with ID: {communication_id}")
+                comm = communication.objects.get(id=communication_id)
+                logger.debug(f"Found communication from: {comm.email}")
+                
+                # Update the communication with response and mark as viewed
+                logger.debug("Updating communication with response and marking as viewed")
+                comm.response = response_message
+                comm.viewed = True
+                comm.save()
+                logger.debug("Communication record updated successfully")
+                
+                # Send email to the user
+                from django.core.mail import send_mail
+                from django.conf import settings
+                
+                subject = 'Response to your message - Panchayat Sandesh'
+                email_body = f"""
+                Dear User,
+                
+                Thank you for contacting Panchayat Sandesh. Here is our response to your inquiry:
+                
+                {response_message}
+                
+                If you have any further questions, please feel free to contact us again.
+                
+                Best regards,
+                Panchayat Sandesh Team
+                """
+                
+                logger.debug(f"Sending email response to: {comm.email}")
+                send_mail(
+                    subject,
+                    email_body,
+                    settings.DEFAULT_FROM_EMAIL,
+                    [comm.email],
+                    fail_silently=False,
+                )
+                logger.debug("Email sent successfully")
+                
+                messages.success(request, 'Response sent successfully!')
+            except communication.DoesNotExist:
+                logger.error(f"Communication with ID {communication_id} not found")
+                messages.error(request, 'Communication not found.')
+            except Exception as e:
+                logger.error(f"Error sending response: {str(e)}")
+                messages.error(request, f'Error sending response: {str(e)}')
+        else:
+            logger.warning("Missing communication ID or response message")
+            messages.error(request, 'Please provide a response message.')
+            
+        logger.debug("Redirecting to messages page")
+        return redirect('messages')
