@@ -7,11 +7,11 @@ from django.utils.text import slugify
 class User(models.Model):
     user_id = models.UUIDField(primary_key=True, default = uuid.uuid4, editable = False)
     email = models.EmailField(max_length = 100)
-    password = models.CharField(max_length = 100)
-    created_at = models.DateTimeField()
+    password = models.CharField(max_length = 200)
+    created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self.user_id + " " + self.username
+        return str(self.user_id) + " " + self.email
     
 STATUS = (
     ('Published', 'Published'),
@@ -192,3 +192,15 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.number} - {self.article.title}"
+
+class communication(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    whatsapp_number = models.CharField(max_length=100, null=True)
+    message = models.TextField(null=True)
+    email = models.EmailField(null=True)
+    response = models.TextField(null=True)
+    viewed = models.BooleanField(default=False)
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self) -> str:
+        return self.whatsapp_number
