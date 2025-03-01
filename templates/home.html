@@ -42,6 +42,17 @@
                         <span class="ml-2 truncate max-w-md">Latest updates on rural development initiatives across India</span>
                     </div>
 
+                    <!-- Search Bar -->
+                    <div class="relative flex items-center">
+                        <!-- Desktop Search -->
+                        <form action="{% url 'home' %}" method="GET" class="hidden md:flex items-center">
+                            <input type="text" name="search" placeholder="Search news..." class="bg-[#3d1f1a] text-[#efe6d4] rounded-lg pl-3 pr-10 py-1 w-48 focus:outline-none focus:ring-2 focus:ring-[#d8982e] transition-all duration-300">
+                            <button type="submit" class="absolute right-2 text-[#d8982e] hover:text-[#efe6d4] transition-colors duration-300">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </form>
+                    </div>
+
                     <!-- Social Links -->
                     <div class="flex items-center space-x-6 justify-center w-full md:w-auto">
                         <a href="#" class="hover:text-[#d8982e] transition-colors duration-300 text-xl md:text-base">
@@ -87,6 +98,34 @@
                                  class="h-8 object-contain lazyload"
                                  loading="lazy">
                         </div>
+
+                        <button onclick="toggleSearchPopup()" class="block md:hidden text-[#d8982e] hover:text-[#efe6d4] transition-colors duration-300">
+                            <i class="bi bi-search text-xl"></i>
+                        </button>
+
+                        <!-- Mobile Search Popup -->
+                        <div id="searchPopup" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm hidden z-50 md:hidden">
+                            <div class="flex items-center justify-center min-h-screen px-4">
+                                <div class="bg-[#3d1f1a] w-full max-w-md rounded-lg p-4 relative animate__animated animate__fadeInUp">
+                                    <form action="{% url 'home' %}" method="GET" class="flex items-center">
+                                        <input type="text" name="search" placeholder="Search news..." class="bg-[#2a1612] text-[#efe6d4] rounded-lg pl-3 pr-10 py-2 w-full focus:outline-none focus:ring-2 focus:ring-[#d8982e] transition-all duration-300">
+                                        <button type="submit" class="absolute right-6 text-[#d8982e] hover:text-[#efe6d4] transition-colors duration-300">
+                                            <i class="bi bi-search text-xl"></i>
+                                        </button>
+                                    </form>
+                                    <button onclick="toggleSearchPopup()" class="absolute -top-10 right-2 text-white">
+                                        <i class="bi bi-x-lg text-2xl"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <script>
+                            function toggleSearchPopup() {
+                                const popup = document.getElementById('searchPopup');
+                                popup.classList.toggle('hidden');
+                            }
+                        </script>
 
                         <!-- Subscribe Button -->
                         <div class="animate__animated animate__fadeInRight">
@@ -238,7 +277,7 @@
             </div>
         </div>
 
-        <div class="w-full md:hidden overflow-hidden" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/media/mobile-home-banner.jpg'); background-size: contain; background-position: center; width: 100%; height: 340px;">
+        <div class="w-full md:hidden overflow-hidden" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/media/mobile-home-banner.jpg'); background-size: contain; background-position: center; width: 100%; height: 340px;  background-repeat:no-repeat;">
             <div class="container mx-auto px-4 py-6">
                 <div class="grid grid-cols-1 gap-4" style="height: 350px;">
                     <div class="rounded-xl shadow-lg p-3 sm:p-4 animate__animated animate__fadeInLeft animate__delay-1s transform hover:scale-[1.02] transition-transform duration-300">
@@ -438,6 +477,7 @@
             </div>
         </div>
 
+        <!-- All News Section -->
         <section class="w-full bg-[#f3e6ca] py-12 px-4">
             <div class="container mx-auto">
                 <!-- Section Header -->
@@ -565,7 +605,7 @@
             </div>
         </section>
 
-        <section class="w-full bg-[#f3e6ca] p-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <section class="w-full bg-[#f3e6ca] p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
             <!-- Trending News -->
             <div class="bg-[#f4e7cb] p-4 rounded-lg shadow-md">
                 <div class="flex items-center mb-4">
@@ -607,31 +647,6 @@
                 {% endfor %}
                 {% endif %}
             </div>
-    
-            <!-- Last News -->
-            <div class="bg-[#f4e7cb] p-4 rounded-lg shadow-md">
-                <div class="flex items-center mb-4">
-                    <span class="w-3 h-3 rounded-full bg-[#d8982e] mr-2"></span>
-                    <h2 class="text-xl font-bold text-[#5a3d2b]">LAST NEWS</h2>
-                </div>
-    
-                <div class="space-y-4">
-                    <div class="flex items-center space-x-4">
-                        <img src="https://placehold.co/80x80" alt="Tokyo Image" class="w-16 h-16 rounded-md shadow-sm lazyload">
-                        <div>
-                            <h3 class="font-bold text-sm text-[#5a3d2b]">Tokyo Has Banned Spectators Amidst Covid-19</h3>
-                            <p class="text-xs text-gray-600 flex items-center"><span class="mr-2"><i class="fa fa-calendar"></i></span>July 28, 2021</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-4">
-                        <img src="https://placehold.co/80x80" alt="Building Image" class="w-16 h-16 rounded-md shadow-sm lazyload">
-                        <div>
-                            <h3 class="font-bold text-sm text-[#5a3d2b]">Most Infants In 91 Countries Are Suffering From Malnutrition</h3>
-                            <p class="text-xs text-gray-600 flex items-center"><span class="mr-2"><i class="fa fa-calendar"></i></span>July 28, 2021</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </section>
 
         <!-- Main Content Grid -->
@@ -663,7 +678,7 @@
 
                 <!-- Main Content Area -->
                 <main class="lg:col-span-6 space-y-8 w-full">
-                   <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                         <div class="flex items-center mb-6 p-6">
                             <span class="w-3 h-3 rounded-full bg-[#d8982e] mr-2"></span>
                             <h2 class="text-xl font-bold text-[#5a3d2b]">Heroes Of Panchayat</h2>
@@ -696,6 +711,7 @@
                         </div>
                         {% endif %}
                     </div>
+
                     <!-- Latest News Grid -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
                         {% for post in posts|slice:":4" %}
