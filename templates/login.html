@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panchayat Sandesh - Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        body {
+            background-color: #1a110d;
+            color: #ffffff;
+        }
+        .login-container {
+            min-height: 100vh;
+        }
+        .login-card {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            background-color: #2a1c17;
+            border: 1px solid #4a332c;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container flex items-center justify-center">
+        <div class="login-card rounded-lg p-8 w-full max-w-md mx-4 animate__animated animate__fadeIn">
+            <div class="text-center mb-8">
+                <img src="/media/images/panchayat_sandesh_logo.png" alt="Panchayat Sandesh Logo" class="mx-auto h-24 animate__animated animate__pulse animate__delay-1s bg-transparent">
+                <h2 class="text-3xl font-bold mt-4 text-[#d8982e]">Panchayat Sandesh</h2>
+                <p class="text-gray-400 mt-2">Login to your account</p>
+            </div>
+            
+            {% if messages %}
+                <div class="mb-4">
+                    {% for message in messages %}
+                        <div class="p-4 {% if message.tags == 'error' %}bg-red-900/50 text-red-200{% elif message.tags == 'info' %}bg-blue-900/50 text-blue-200{% endif %} rounded-lg animate__animated animate__fadeIn border {% if message.tags == 'error' %}border-red-700{% elif message.tags == 'info' %}border-blue-700{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            <form method="POST" action="{% url 'panchayatuser' %}" class="space-y-6">
+                {% csrf_token %}
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email Address</label>
+                    <input type="email" id="email" name="email" required 
+                           class="w-full px-4 py-2 rounded-lg bg-[#2a1c17] border border-[#4a332c] focus:outline-none focus:border-[#d8982e] text-black">
+                </div>
+                
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-300 mb-1">Password</label>
+                    <input type="password" id="password" name="password" required 
+                           class="w-full px-4 py-2 rounded-lg bg-[#2a1c17] border border-[#4a332c] focus:outline-none focus:border-[#d8982e] text-black">
+                </div>
+                
+                <div>
+                    <button type="submit" 
+                            class="w-full bg-[#d8982e] hover:bg-[#b77924] text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300">
+                        Login
+                    </button>
+                </div>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <a href="{% url 'home' %}" class="text-[#d8982e] hover:text-[#b77924] text-sm flex items-center justify-center gap-2 transition-colors duration-300">
+                    <i class="bi bi-arrow-left"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
