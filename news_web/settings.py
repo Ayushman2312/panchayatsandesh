@@ -144,7 +144,13 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'ayushmantiwari2312@gmail.com'  # Replace with your Gmail address
+EMAIL_HOST_PASSWORD = 'kzdo jksl eoga ccja'  # Replace with your app password
+DEFAULT_FROM_EMAIL = 'Panchayat Sandesh <your-email@gmail.com>'  # Replace with your email
 
 # Tailwind CSS setup for Django production without a dedicated Tailwind app
 
