@@ -24,6 +24,17 @@ class HomeView(TemplateView):
         context["trending_news"] = trending_news
         context["breaking_news"] = breaking_news
         context["last_news"] = last_news
+        # Get all articles ordered by creation date
+        # Get all published articles
+        all_news = Article.objects.filter(status='Published').order_by('-created_at')
+        
+        # Add all news to context without filtering
+        context["all_news"] = all_news
+        all_categories = Category.objects.all()
+        news_by_category = {}
+        for category in all_categories:
+            news_by_category[category] = Article.objects.filter(category=category).order_by('-created_at')
+        context["news_by_category"] = news_by_category
         return context
     
 class CategoryView(TemplateView):
