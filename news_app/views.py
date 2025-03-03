@@ -203,7 +203,7 @@ class CategoryNewsDetailView(TemplateView):
         # You might want to add related articles
         related_articles = Article.objects.filter(category=category).exclude(slug=news_slug)[:5]
         context['related_articles'] = related_articles
-        comments = Comment.objects.filter(article=article, is_approved=True)
+        comments = Comment.objects.filter(article=article)
         context['comments'] = comments
 
         return context
