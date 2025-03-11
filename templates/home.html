@@ -888,8 +888,8 @@
                 </div>
             </div>
         </div>
-        <!-- Members Section -->
-        <section class="container mx-auto px-4 py-12">
+        {% comment %}<!-- Members Section -->
+<!--         <section class="container mx-auto px-4 py-12">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-[#5a3d2b]">OUR TEAM</h2>
                 <div class="w-24 h-1 bg-[#d8982e] mx-auto mt-4"></div>
@@ -1000,7 +1000,62 @@
                     display: block;
                 }
             }
-        </style>
+        </style>{% endcomment %}
+
+        <!-- Team Members Section -->
+        <div class="container mx-auto px-4 py-12">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-[#5a3d2b]">OUR TEAM</h2>
+                <div class="w-24 h-1 bg-[#d8982e] mx-auto mt-4"></div>
+                <p class="text-[#2a1612] mt-4">Meet our dedicated team of professionals</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Team Member 1 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
+                    <div class="relative">
+                        <img src="media/images/tm2.jpg" alt="Team Member" class="w-full h-64 object-contain">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#5a3d2b] to-transparent p-4">
+                            <h3 class="text-white font-bold text-lg">Anurag Tiwari</h3>
+                            {% comment %} <p class="text-[#d8982e]">Chief Editor</p> {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
+                    <div class="relative">
+                        <img src="media/images/tm1.jpg" alt="Team Member" class="w-full h-64 object-contain">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#5a3d2b] to-transparent p-4">
+                            <h3 class="text-white font-bold text-lg">Deepak Rajoria</h3>
+                            {% comment %} <p class="text-[#d8982e]">Senior Reporter</p> {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
+                    <div class="relative">
+                        <img src="media/images/udit narayan.jpg" alt="Team Member" class="w-full h-64 object-contain">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#5a3d2b] to-transparent p-4">
+                            <h3 class="text-white font-bold text-lg">Udit Narayan</h3>
+                            {% comment %} <p class="text-[#d8982e]">Photographer</p> {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 4 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
+                    <div class="relative">
+                        <img src="media/images/mahendra_tiwari.jpg" alt="Team Member" class="w-full h-64 object-contain">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#5a3d2b] to-transparent p-4">
+                            <h3 class="text-white font-bold text-lg">Mahendra Tiwari</h3>
+                            {% comment %} <p class="text-[#d8982e]">Content Writer</p> {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Social Media Section -->
         <div class="container mx-auto px-4 py-12">
