@@ -23,10 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-a0gf2ssfudd)+0c9!nsqy-5o7s_d=ac*w23@*9w#7_agalwr18'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-# ALLOWED_HOSTS = ['82.29.162.53','panchayatsandesh.com']
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['82.29.162.53','panchayatsandesh.com']
+# ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -75,23 +75,23 @@ WSGI_APPLICATION = 'news_web.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'panchayatsandesh',
-#         'USER': 'ayushman',
-#         'PASSWORD': 'Ayushman@23122003',
-#         'HOST': 'localhost',
-#         'PORT': '3306',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'panchayatsandesh',
+        'USER': 'ayushman',
+        'PASSWORD': 'Ayushman@23122003',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
