@@ -19,6 +19,7 @@ admin.site.register(GalleryImages)
 admin.site.register(UpcomingEvents)
 admin.site.register(EventRegistration)
 admin.site.register(Comment)
+admin.site.register(Members)
 # admin.site.register()
 
 

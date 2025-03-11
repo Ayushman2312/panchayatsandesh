@@ -204,3 +204,15 @@ class communication(models.Model):
 
     def __str__(self) -> str:
         return self.whatsapp_number
+
+class Members(models.Model):
+    name = models.CharField(max_length=100)
+    designation = models.CharField(max_length=100)
+    description = models.TextField()
+    image = models.ImageField(upload_to="images/members/")
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.name
+    
+

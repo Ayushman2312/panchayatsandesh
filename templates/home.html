@@ -120,13 +120,6 @@
                             </div>
                         </div>
 
-                        <script>
-                            function toggleSearchPopup() {
-                                const popup = document.getElementById('searchPopup');
-                                popup.classList.toggle('hidden');
-                            }
-                        </script>
-
                         <!-- Subscribe Button -->
                         <div class="animate__animated animate__fadeInRight">
                             <a href="{% url 'subscribe' %}" 
@@ -351,7 +344,6 @@
                     <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
                     <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
                     <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
-                    <img src="/media/images/panchayat_sandesh_logo.png" alt="THE PANCHAYAT SANDESH" class="h-10 lazyload shrink-0">
                 </div>
                 <!-- Duplicate set for seamless loop -->
                 {% comment %} <div class="flex items-center gap-32 px-8 whitespace-nowrap">
@@ -365,27 +357,6 @@
             </div>
         </div>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const scrollContainer = document.getElementById('scrollContainer');
-                let scrollPosition = 0;
-                const speed = 1; // Adjust speed as needed
-
-                function animate() {
-                    scrollPosition -= speed;
-                    
-                    // Reset position when first set of images is fully scrolled
-                    if (scrollPosition <= -scrollContainer.children[0].offsetWidth) {
-                        scrollPosition = 0;
-                    }
-                    
-                    scrollContainer.style.transform = `translateX(${scrollPosition}px)`;
-                    requestAnimationFrame(animate);
-                }
-
-                animate();
-            });
-        </script>
 
         <div class="bg-[#f3e6ca] py-16 px-4">
             <div class="container mx-auto">
@@ -804,119 +775,92 @@
                 </div>
             </div>
         </div>
+        <!-- Members Section -->
+        <section class="container mx-auto px-4 py-12">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-[#5a3d2b]">OUR TEAM</h2>
+                <div class="w-24 h-1 bg-[#d8982e] mx-auto mt-4"></div>
+            </div>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const container = document.querySelector('.news-container');
-                const items = document.querySelectorAll('.news-item');
-                const dotsContainer = document.getElementById('news-dots');
-                const prevBtn = document.getElementById('prev-btn');
-                const nextBtn = document.getElementById('next-btn');
-                
-                if (!items.length) return;
+            <div class="relative">
+                <div class="overflow-x-auto pb-4 hide-scrollbar relative">
+                    <div class="flex gap-8" id="teamContainer">
+                        {% for member in members %}
+                        <div class="w-full sm:w-[calc(50%-16px)] lg:w-[calc(33.333%-22px)] flex-none bg-white rounded-xl shadow-2xl overflow-hidden transform transition-all duration-500 hover:scale-102 hover:shadow-xl">
+                            <div class="relative h-[300px] overflow-hidden group">
+                                <img src="{{member.image.url}}" 
+                                     alt="{{member.name}}" 
+                                     class="w-full h-full object-contain object-center transform transition-transform duration-500 group-hover:scale-105"
+                                     loading="lazy">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            </div>
+                            <div class="p-8 bg-white">
+                                <h3 class="text-2xl font-bold text-[#5a3d2b] mb-3 tracking-tight">{{member.name}}</h3>
+                                <p class="text-[#d8982e] font-semibold text-lg mb-4">{{member.designation}}</p>
+                                <button 
+                                    onclick="openModal('{{member.name|escapejs}}', '{{member.designation|escapejs}}', '{{member.description|escapejs}}', '{{member.image.url|escapejs}}')"
+                                    class="bg-[#5a3d2b] text-white px-6 py-2 rounded-lg hover:bg-[#d8982e] transition-colors duration-300"
+                                >
+                                    Read More
+                                </button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    {% if members.count > 3 %}
+                    <button id="scrollLeftBtn" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-[#5a3d2b]/90 text-white p-3 rounded-full shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-[#5a3d2b] hidden lg:block">
+                        <i class="bi bi-chevron-left text-2xl"></i>
+                    </button>
+                    <button id="scrollRightBtn" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-[#5a3d2b]/90 text-white p-3 rounded-full shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-[#5a3d2b] hidden lg:block">
+                        <i class="bi bi-chevron-right text-2xl"></i>
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
 
-                let currentIndex = 0;
-                let autoScrollInterval;
-                
-                // Create navigation dots
-                items.forEach((_, index) => {
-                    const dot = document.createElement('button');
-                    dot.classList.add('w-3', 'h-3', 'rounded-full', 'bg-[#d8982e]', 'opacity-50', 'transition-opacity', 'hover:opacity-75');
-                    dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
-                    dot.addEventListener('click', () => {
-                        goToSlide(index);
-                        resetInterval();
-                    });
-                    dotsContainer.appendChild(dot);
-                });
+        <!-- Modal -->
+        <div id="memberModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden">
+            <div class="min-h-screen px-4 text-center">
+                <span class="inline-block h-screen align-middle" aria-hidden="true">&#8203;</span>
+                <div class="inline-block w-full max-w-4xl p-6 my-8 text-left align-middle transition-all transform bg-gradient-to-br from-[#f3e6ca] to-[#fff5e6] rounded-2xl shadow-2xl border-2 border-[#d8982e]/30 relative">
+                    <button onclick="closeModal()" class="absolute -top-4 -right-4 bg-[#d8982e] text-white p-3 rounded-full hover:bg-[#b77924] transition-all duration-300 shadow-xl hover:scale-110 group">
+                        <i class="bi bi-x-lg text-xl group-hover:rotate-90 transition-transform duration-300"></i>
+                    </button>
+                    
+                    <div class="flex flex-col md:flex-row gap-8 items-center">
+                        <div class="w-full md:w-2/5">
+                            <div class="relative rounded-xl overflow-hidden shadow-2xl border-4 border-white/80 group">
+                                <img id="modalImage" src="" alt="" class="w-full h-[450px] object-cover transform transition duration-700 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="w-full md:w-3/5">
+                            <div class="bg-white/70 backdrop-blur-lg rounded-xl p-8 shadow-lg border border-white/40">
+                                <h3 id="modalName" class="text-4xl font-bold text-[#5a3d2b] mb-4 font-serif"></h3>
+                                <div class="w-24 h-1 bg-gradient-to-r from-[#d8982e] to-[#b77924] mb-6 rounded-full"></div>
+                                <p id="modalDesignation" class="text-[#d8982e] font-bold text-2xl mb-8"></p>
+                                <div class="max-h-[300px] overflow-y-auto pr-4 scrollbar-thin scrollbar-thumb-[#d8982e] scrollbar-track-[#f3e6ca]">
+                                    <p id="modalDescription" class="text-[#2a1612] leading-relaxed text-lg tracking-wide"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                const dots = dotsContainer.querySelectorAll('button');
-                
-                function updateDots() {
-                    dots.forEach((dot, index) => {
-                        dot.classList.toggle('opacity-100', index === currentIndex);
-                        dot.classList.toggle('opacity-50', index !== currentIndex);
-                    });
-                }
-
-                function goToSlide(index) {
-                    currentIndex = index;
-                    const offset = currentIndex * (100 / items.length);
-                    container.style.transform = `translateX(-${offset}%)`;
-                    updateDots();
-                }
-
-                function nextSlide() {
-                    currentIndex = (currentIndex + 1) % items.length;
-                    goToSlide(currentIndex);
-                }
-
-                function prevSlide() {
-                    currentIndex = (currentIndex - 1 + items.length) % items.length;
-                    goToSlide(currentIndex);
-                }
-
-                function startAutoScroll() {
-                    if (autoScrollInterval) {
-                        clearInterval(autoScrollInterval);
-                    }
-                    autoScrollInterval = setInterval(() => {
-                        nextSlide();
-                    }, 5000);
-                }
-
-                function resetInterval() {
-                    clearInterval(autoScrollInterval);
-                    startAutoScroll();
-                }
-
-                // Event listeners for navigation buttons
-                nextBtn.addEventListener('click', () => {
-                    nextSlide();
-                    resetInterval();
-                });
-
-                prevBtn.addEventListener('click', () => {
-                    prevSlide();
-                    resetInterval();
-                });
-
-                // Initialize first slide and dots
-                goToSlide(0);
-                
-                // Start auto scroll immediately
-                startAutoScroll();
-
-                // Pause auto scroll on hover
-                container.addEventListener('mouseenter', () => {
-                    clearInterval(autoScrollInterval);
-                });
-
-                container.addEventListener('mouseleave', () => {
-                    startAutoScroll();
-                });
-
-                // Keyboard navigation
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'ArrowLeft') {
-                        prevSlide();
-                        resetInterval();
-                    } else if (e.key === 'ArrowRight') {
-                        nextSlide();
-                        resetInterval();
-                    }
-                });
-
-                // Handle visibility change
-                document.addEventListener('visibilitychange', () => {
-                    if (document.hidden) {
-                        clearInterval(autoScrollInterval);
-                    } else {
-                        startAutoScroll();
-                    }
-                });
-            });
-        </script>
+        <style>
+            .hide-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+            .hide-scrollbar {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+        </style>
 
         <style>
             .news-container {
@@ -1058,5 +1002,6 @@
         </div>
     </footer>
     <script src="{% static 'js/script.js' %}?v=2"></script>
+    <script src="{% static 'js/home.js' %}?v=2"></script>
 </body>
 </html>

@@ -23,10 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-a0gf2ssfudd)+0c9!nsqy-5o7s_d=ac*w23@*9w#7_agalwr18'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['82.29.162.53','panchayatsandesh.com']
-
+# ALLOWED_HOSTS = ['82.29.162.53','panchayatsandesh.com']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -75,14 +75,21 @@ WSGI_APPLICATION = 'news_web.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'panchayatsandesh',
+#         'USER': 'ayushman',
+#         'PASSWORD': 'Ayushman@23122003',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'panchayatsandesh',
-        'USER': 'ayushman',
-        'PASSWORD': 'Ayushman@23122003',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -141,7 +148,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #for media files
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

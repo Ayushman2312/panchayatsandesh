@@ -41,6 +41,7 @@ class HomeView(TemplateView):
         breaking_news = BreakingNews.objects.order_by('-created_at')[:2]
         bb = BreakingNews.objects.order_by('-created_at')[:1]
         breakingnews = BreakingNews.objects.all()
+        context["members"] = Members.objects.all()
         context["bb"] = bb
         context["breakingnews"] = breakingnews
         context["latest_hot_news"] = latest_hot_news
@@ -406,3 +407,5 @@ class MessagesView(TemplateView):
             
         logger.debug("Redirecting to messages page")
         return redirect('messages')
+
+
