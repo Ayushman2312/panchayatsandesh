@@ -41,6 +41,10 @@ class HomeView(TemplateView):
         breaking_news = BreakingNews.objects.order_by('-created_at')[:2]
         bb = BreakingNews.objects.order_by('-created_at')[:1]
         breakingnews = BreakingNews.objects.all()
+        state_news = StateNews.objects.order_by('-created_at')[:4]
+        national_news = NationalNews.objects.order_by('-created_at')[:4]
+        sports_news = SportsNews.objects.order_by('-created_at')[:4]
+        agriculture_trending = AgricultureTrending.objects.order_by('-created_at')[:4]
         context["members"] = Members.objects.all()
         context["bb"] = bb
         context["breakingnews"] = breakingnews
@@ -48,6 +52,10 @@ class HomeView(TemplateView):
         context["trending_news"] = trending_news
         context["breaking_news"] = breaking_news
         context["last_news"] = last_news
+        context["state_news"] = state_news
+        context["national_news"] = national_news
+        context["sports_news"] = sports_news
+        context["agriculture_trending"] = agriculture_trending
         # Get all articles ordered by creation date
         # Get all published articles
         all_news = Article.objects.filter(status='Published').order_by('-created_at')
