@@ -214,5 +214,60 @@ class Members(models.Model):
 
     def __str__(self):
         return self.name
+
+class StateNews(models.Model):
+    news_id = models.UUIDField(primary_key=True, default = uuid.uuid4, editable=False)
+    title = models.CharField(max_length = 100)
+    description = models.TextField()
+    content = models.TextField()
+    images = models.ImageField(upload_to="images/state-news/")
+    author = models.CharField(max_length = 100, default = 'Anurag Tiwari')
+    created_at = models.DateTimeField(null = True, blank=True, default = timezone.now)
+
+    def __str__(self):
+        return self.title
+
+class NationalNews(models.Model):
+    news_id = models.UUIDField(primary_key=True, default = uuid.uuid4, editable=False)
+    title = models.CharField(max_length = 100)
+    description = models.TextField()
+    content = models.TextField()
+    images = models.ImageField(upload_to="images/national-news/")
+    author = models.CharField(max_length = 100, default = 'Anurag Tiwari')
+    created_at = models.DateTimeField(null = True, blank=True, default = timezone.now)
+
+    def __str__(self):
+        return self.title
     
+class SportsNews(models.Model):
+    news_id = models.UUIDField(primary_key=True, default = uuid.uuid4, editable=False)
+    title = models.CharField(max_length = 100)
+    description = models.TextField()
+    content = models.TextField()
+    images = models.ImageField(upload_to="images/sports-news/")
+    author = models.CharField(max_length = 100, default = 'Anurag Tiwari')
+    created_at = models.DateTimeField(null = True, blank=True, default = timezone.now)
+
+    def __str__(self):
+        return self.title
+    
+
+NEWS_TYPE = (
+    ('Krishi News', 'Krishi News'),
+    ('Horticulture News', 'Horticulture News'),
+    ('Animal Husbandry News', 'Animal Husbandry News'),
+)
+
+class AgricultureTrending(models.Model):
+    news_id = models.UUIDField(primary_key=True, default = uuid.uuid4, editable=False)
+    title = models.CharField(max_length = 100)
+    news_type = models.CharField(max_length = 100, choices = NEWS_TYPE)
+    description = models.TextField()
+    content = models.TextField()
+    images = models.ImageField(upload_to="images/agriculture-trending/")
+    author = models.CharField(max_length = 100, default = 'Anurag Tiwari')
+    created_at = models.DateTimeField(null = True, blank=True, default = timezone.now)
+
+    def __str__(self):
+        return self.title
 
