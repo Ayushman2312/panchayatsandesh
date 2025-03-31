@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-a0gf2ssfudd)+0c9!nsqy-5o7s_d=ac*w23@*9w#7_agalwr18'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['82.29.162.53','panchayatsandesh.com']
 # ALLOWED_HOSTS = ['*']
@@ -149,15 +149,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #for media files
-
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'ayushmantiwari2312@gmail.com'  # Replace with your Gmail address
-EMAIL_HOST_PASSWORD = 'kzdo jksl eoga ccja'  # Replace with your app password
-DEFAULT_FROM_EMAIL = 'Panchayat Sandesh <your-email@gmail.com>'  # Replace with your email
+EMAIL_HOST = 'smtp.hostinger.com'  # Hostinger SMTP server
+EMAIL_PORT = 465  # Use 465 for SSL or 587 for TLS
+EMAIL_USE_SSL = True  # Use SSL for secure connection
+# EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'admin@thepanchayatsandesh.com'  # Your professional email
+EMAIL_HOST_PASSWORD = '214Deepak@@'  # Your email password
+DEFAULT_FROM_EMAIL = 'Panchayat Sandesh <admin@thepanchayatsandesh.com>'
 
 # Tailwind CSS setup for Django production without a dedicated Tailwind app
 

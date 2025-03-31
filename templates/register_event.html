@@ -1,6 +1,17 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta http-equiv="Cache-Control" content="max-age=3600, public">
+        <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; img-src 'self' data:; object-src 'none';">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+        <title>Register for {{ event.event_name }}</title>
+    </head>
+    <body class="bg-gradient-to-br from-[#f5e3c4] to-[#efe6d4] min-h-screen">
     <div class="container mx-auto px-2 sm:px-4 py-8 sm:py-12 md:py-20">
         <div class="max-w-4xl mx-auto">
             <!-- Event Card -->
@@ -94,4 +105,5 @@
             </div>
         </div>
     </div>
-{% endblock %}
+</body>
+</html>

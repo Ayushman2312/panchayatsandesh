@@ -25,4 +25,6 @@ urlpatterns = [
     path('messages/', MessagesView.as_view(), name="messages"),
     path('panchayatuser/', Login, name='panchayatuser'),
     path('contact/', ContactView.as_view(), name='contact'),
+    path('archives/', ArchivesView.as_view(), name='archives'),
+    path('api/archive-news/<uuid:news_id>/comments/', ArchiveNewsCommentView.as_view(), name='archive_news_comments'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

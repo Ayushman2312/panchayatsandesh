@@ -1,0 +1,230 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<div class="bg-gradient-to-b from-[#f5e3c4] to-[#efe6d4] min-h-screen py-12 px-4">
+    <div class="container mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#2a1612] mb-4" style="font-family: 'Merriweather', serif;">News Archives</h1>
+            <div class="w-24 h-1 bg-[#d8982e] mx-auto mb-4"></div>
+        </div>
+
+        <!-- News List -->
+        <div class="max-w-4xl mx-auto">
+            <ul class="list-none">
+                {% if archive_news %}
+                    {% for news in archive_news %}
+                        <li class="mb-4">
+                            <div class="flex justify-between items-center">
+                                <h2 class="text-xl font-bold text-[#2a1612]">{{ news.title }}</h2>
+                                <button onclick="openNewsModal('{{ news.title|escapejs }}', '{{ news.content|escapejs }}', '{{ news.description|escapejs }}', '{% if news.images %}{{ news.images.url }}{% endif %}', '{{ news.created_at|date:"M d, Y" }}', '{{ news.category.name|default:"" }}', '{{ news.views }}', '{{ news.comments.count }}', '{{ news.id }}')" class="text-[#d8982e] hover:text-[#b77924] transition-colors duration-300">
+                                    <i class="bi bi-eye"></i> View Details
+                                </button>
+                            </div>
+                            {% if not forloop.last %}
+                                <div class="border-b border-[#d8982e]/20 my-4"></div>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    <li class="text-center py-12">
+                        <div class="text-6xl text-[#d8982e] mb-4">
+                            <i class="bi bi-newspaper"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-[#2a1612] mb-2">No News Available</h3>
+                        <p class="text-[#5a3d2b]">Check back later for updates!</p>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <!-- News Modal -->
+        <div id="newsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+            <div class="bg-[#2a1612] rounded-lg max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto text-white">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h2 id="modalTitle" class="text-2xl font-bold text-[#d8982e]"></h2>
+                        <button onclick="closeNewsModal()" class="text-[#d8982e] hover:text-[#b77924]">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </div>
+                    <div class="mb-4">
+                        <img id="modalImage" src="" alt="News Image" class="w-full h-64 object-cover rounded-lg">
+                    </div>
+                    <div class="flex justify-between items-center mb-4">
+                        <span id="modalDate" class="text-sm text-[#d8982e]"></span>
+                        <span id="modalCategory" class="text-sm text-[#d8982e]"></span>
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-[#d8982e] mb-2">Description</h3>
+                        <p id="modalDescription" class="text-white mb-4"></p>
+                        <h3 class="text-lg font-semibold text-[#d8982e] mb-2">Content</h3>
+                        <p id="modalContent" class="text-white mb-4"></p>
+                    </div>
+                    <div class="flex items-center text-sm text-[#d8982e] mb-6">
+                        <i class="bi bi-eye mr-1"></i> <span id="modalViews"></span>
+                        <i class="bi bi-chat-dots ml-3 mr-1"></i> <span id="modalComments"></span>
+                    </div>
+
+                    <!-- Comments Section -->
+                    <div class="border-t border-[#d8982e]/20 pt-6">
+                        <h3 class="text-lg font-semibold text-[#d8982e] mb-4">Comments</h3>
+                        <form id="commentForm" class="mb-6">
+                            <input type="hidden" id="newsId" name="newsId">
+                            <textarea id="commentText" name="comment" rows="3" class="w-full bg-[#3a2622] text-white rounded-lg p-3 mb-2" placeholder="Write your comment..."></textarea>
+                            <button type="submit" class="bg-[#d8982e] text-white px-4 py-2 rounded-lg hover:bg-[#b77924] transition-colors duration-300">
+                                Post Comment
+                            </button>
+                        </form>
+                        <div id="commentsList" class="space-y-4">
+                            <!-- Comments will be dynamically loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        {% if archive_news.paginator.num_pages > 1 %}
+        <div class="flex justify-center space-x-2 mt-12">
+            {% if archive_news.has_previous %}
+                <a href="?page=1" class="px-4 py-2 bg-[#d8982e] text-white rounded-lg hover:bg-[#b77924] transition-colors duration-300">
+                    <i class="bi bi-chevron-double-left"></i>
+                </a>
+                <a href="?page={{ archive_news.previous_page_number }}" class="px-4 py-2 bg-[#d8982e] text-white rounded-lg hover:bg-[#b77924] transition-colors duration-300">
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+            {% endif %}
+
+            <span class="px-4 py-2 bg-white text-[#2a1612] rounded-lg">
+                Page {{ archive_news.number }} of {{ archive_news.paginator.num_pages }}
+            </span>
+
+            {% if archive_news.has_next %}
+                <a href="?page={{ archive_news.next_page_number }}" class="px-4 py-2 bg-[#d8982e] text-white rounded-lg hover:bg-[#b77924] transition-colors duration-300">
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+                <a href="?page={{ archive_news.paginator.num_pages }}" class="px-4 py-2 bg-[#d8982e] text-white rounded-lg hover:bg-[#b77924] transition-colors duration-300">
+                    <i class="bi bi-chevron-double-right"></i>
+                </a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+function openNewsModal(title, content, description, image, date, category, views, comments, newsId) {
+    try {
+        document.getElementById('modalTitle').textContent = decodeURIComponent(title);
+        document.getElementById('modalContent').textContent = decodeURIComponent(content);
+        document.getElementById('modalDescription').textContent = decodeURIComponent(description);
+        document.getElementById('modalImage').src = image;
+        document.getElementById('modalDate').textContent = date;
+        document.getElementById('modalCategory').textContent = category || 'Uncategorized';
+        document.getElementById('modalViews').textContent = views || '0';
+        document.getElementById('modalComments').textContent = comments || '0';
+        document.getElementById('newsId').value = newsId;
+        
+        // Load comments for this news
+        loadComments(newsId);
+        
+        const modal = document.getElementById('newsModal');
+        if (modal) {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+    } catch (error) {
+        console.error('Error opening modal:', error);
+    }
+}
+
+function closeNewsModal() {
+    try {
+        const modal = document.getElementById('newsModal');
+        if (modal) {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        }
+    } catch (error) {
+        console.error('Error closing modal:', error);
+    }
+}
+
+function loadComments(newsId) {
+    // Fetch comments from backend and display them
+    fetch(`/api/archive-news/${newsId}/comments/`)
+        .then(response => response.json())
+        .then(comments => {
+            const commentsList = document.getElementById('commentsList');
+            commentsList.innerHTML = comments.map(comment => `
+                <div class="bg-[#3a2622] rounded-lg p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-[#d8982e] font-medium">${comment.author}</span>
+                        <span class="text-sm text-[#d8982e]">${comment.created_at}</span>
+                    </div>
+                    <p class="text-white">${comment.content}</p>
+                </div>
+            `).join('');
+        })
+        .catch(error => console.error('Error loading comments:', error));
+}
+
+// Handle comment form submission
+document.getElementById('commentForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const newsId = document.getElementById('newsId').value;
+    const comment = document.getElementById('commentText').value;
+
+    fetch(`/api/archive-news/${newsId}/comments/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({ content: comment })
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('commentText').value = '';
+        loadComments(newsId);
+    })
+    .catch(error => console.error('Error posting comment:', error));
+});
+
+// Close modal when clicking outside
+document.getElementById('newsModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeNewsModal();
+    }
+});
+
+// Close modal on escape key press
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeNewsModal();
+    }
+});
+
+// Helper function to get CSRF token
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+
+{% endblock %}

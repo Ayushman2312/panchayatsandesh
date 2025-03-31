@@ -2,10 +2,12 @@ from typing import Any
 from django.views.generic import TemplateView
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import *
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from django.views import View
 from django.contrib.auth.hashers import check_password
+from django.core.paginator import Paginator
+import json
 
 import logging
 
@@ -424,3 +426,81 @@ class ContactView(TemplateView):
         context = super().get_context_data(**kwargs)
         return context
 
+class ArchivesView(TemplateView):
+    template_name = 'archives.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Get all archive news ordered by created date
+        archive_news = ArchiveNews.objects.all().order_by('-created_at')
+
+        # Increment view count for each news item
+        for news in archive_news:
+            news.views = news.views + 1
+            news.save()
+        
+        # Create paginator object
+        paginator = Paginator(archive_news, 10)  # Show 10 items per page
+        
+        # Get page number from request, default to first page
+        page = self.request.GET.get('page', 1)
+        
+        try:
+            # Get the specified page
+            archive_news = paginator.page(page)
+        except:
+            # If page is out of range, deliver last page
+            archive_news = paginator.page(paginator.num_pages)
+
+        context['archive_news'] = archive_news
+        context['paginator'] = paginator
+        return context
+
+class ArchiveNewsCommentView(View):
+    def get(self, request, news_id):
+        logger.debug(f"Getting comments for news_id: {news_id}")
+        try:
+            news = ArchiveNews.objects.get(news_id=news_id)
+            comments = news.news_comments.all().order_by('-created_at')
+            comments_data = [{
+                'author': comment.author,
+                'content': comment.content,
+                'created_at': comment.created_at.strftime('%b %d, %Y %H:%M')
+            } for comment in comments]
+            logger.debug(f"Retrieved {len(comments_data)} comments for news_id: {news_id}")
+            return JsonResponse(comments_data, safe=False)
+        except ArchiveNews.DoesNotExist:
+            logger.warning(f"News not found with id: {news_id}")
+            return JsonResponse({'error': 'News not found'}, status=404)
+
+    def post(self, request, news_id):
+        logger.debug(f"Creating new comment for news_id: {news_id}")
+        try:
+            data = json.loads(request.body)
+            news = ArchiveNews.objects.get(news_id=news_id)
+            
+            comment = ArchiveNewsComment.objects.create(
+                news=news,
+                content=data.get('content', '')
+            )
+            
+            # Increment comment count
+            news.comments = news.comments + 1
+            news.save()
+            
+            logger.info(f"Successfully created comment for news_id: {news_id}")
+            return JsonResponse({
+                'success': True,
+                'comment': {
+                    'author': comment.author,
+                    'content': comment.content,
+                    'created_at': comment.created_at.strftime('%b %d, %Y %H:%M')
+                }
+            })
+        except ArchiveNews.DoesNotExist:
+            logger.warning(f"News not found with id: {news_id}")
+            return JsonResponse({'error': 'News not found'}, status=404)
+        except Exception as e:
+            logger.error(f"Error creating comment for news_id {news_id}: {str(e)}")
+            return JsonResponse({'error': str(e)}, status=400)

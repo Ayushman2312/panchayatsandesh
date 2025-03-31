@@ -21,10 +21,12 @@ admin.site.register(UpcomingEvents)
 admin.site.register(EventRegistration)
 admin.site.register(Comment)
 admin.site.register(Members)
-# admin.site.register()
+admin.site.register(ArchiveNews)
 admin.site.register(StateNews)
 admin.site.register(NationalNews)
 admin.site.register(SportsNews)
 admin.site.register(AgricultureTrending)
+admin.site.register(ArchiveNewsComment)
+# admin.site.register()
 
 
