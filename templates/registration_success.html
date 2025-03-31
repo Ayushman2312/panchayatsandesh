@@ -1,6 +1,6 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
+{% block content %}
 <head>
     <meta http-equiv="Cache-Control" content="max-age=3600, public">
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; img-src 'self' data:; object-src 'none';">
@@ -38,5 +38,4 @@
         </div>
     </div>
     <script src="{% static 'js/rs.js' %}?v=1"></script>
-</body>
-</html>
+{% endblock %}

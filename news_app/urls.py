@@ -24,4 +24,5 @@ urlpatterns = [
     path('communication/', CommunicationView.as_view(), name="communication"),
     path('messages/', MessagesView.as_view(), name="messages"),
     path('panchayatuser/', Login, name='panchayatuser'),
+    path('contact/', ContactView.as_view(), name='contact'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
