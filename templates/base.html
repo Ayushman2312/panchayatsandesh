@@ -19,33 +19,35 @@
 <body class="bg-[#f5e3c4] text-[#5a3d2b]">
     <!-- Top Info Bar -->
     <div class="bg-[#2a1612] text-[#efe6d4] text-sm hidden md:block">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center py-2">
+        <div class="mx-auto px-4">
+            <div class="flex items-center justify-between py-2">
                 <!-- Contact Info -->
-                <div class="flex flex-col md:flex-row items-center md:space-x-6 space-y-2 md:space-y-0 mb-3 md:mb-0 w-full md:w-auto">
-                    <a href="mailto:contact@panchayatsandesh.com" class="flex items-center hover:text-[#d8982e] transition-colors duration-300 w-full md:w-auto justify-center">
+                <div class="flex items-center space-x-6">
+                    <a href="mailto:contact@panchayatsandesh.com" class="flex items-center hover:text-[#d8982e] transition-colors duration-300">
                         <i class="bi bi-envelope mr-2"></i>
                         <span>admin@panchayatsandesh.com</span>
                     </a>
-                    <a href="tel:+911234567890" class="flex items-center hover:text-[#d8982e] transition-colors duration-300 w-full md:w-auto justify-center">
+                    <a href="tel:+911234567890" class="flex items-center md:max-[1210.4px]:text-xs md:max-[1197px]:hidden hover:text-[#d8982e] transition-colors duration-300">
                         <i class="bi bi-telephone mr-2"></i>
                         <span>+91 123 456 7890</span>
                     </a>
                 </div>
 
-                <!-- Right Section -->
-                <div class="flex flex-col md:flex-row items-center md:space-x-6 space-y-3 md:space-y-0 w-full md:w-auto">
+                <!-- Center Section -->
+                <div class="flex items-center">
                     <!-- Breaking News -->
-                    <div class="hidden md:flex items-center">
+                    <div class="flex items-center">
                         <span class="bg-[#d8982e] text-white px-2 py-0.5 rounded-sm text-xs font-bold mr-2">LIVE</span>
                         <span class="text-[#d8982e]">Breaking News:</span>
                         <span class="ml-2 truncate max-w-md">Latest updates on rural development initiatives across India</span>
                     </div>
+                </div>
 
+                <!-- Right Section -->
+                <div class="flex items-center space-x-6">
                     <!-- Search Bar -->
-                    <div class="relative flex items-center">
-                        <!-- Desktop Search -->
-                        <form action="{% url 'home' %}" method="GET" class="hidden md:flex items-center">
+                    <div class="relative">
+                        <form action="{% url 'home' %}" method="GET" class="flex items-center">
                             <input type="text" name="search" placeholder="Search news..." class="bg-[#3d1f1a] text-[#efe6d4] rounded-lg pl-3 pr-10 py-1 w-48 focus:outline-none focus:ring-2 focus:ring-[#d8982e] transition-all duration-300">
                             <button type="submit" class="absolute right-2 text-[#d8982e] hover:text-[#efe6d4] transition-colors duration-300">
                                 <i class="bi bi-search"></i>
@@ -54,14 +56,14 @@
                     </div>
 
                     <!-- Social Links -->
-                    <div class="flex items-center space-x-6 justify-center w-full md:w-auto">
-                        <a href="#" class="hover:text-[#d8982e] transition-colors duration-300 text-xl md:text-base">
+                    <div class="flex items-center space-x-4">
+                        <a href="#" class="hover:text-[#d8982e] transition-colors duration-300">
                             <i class="bi bi-facebook"></i>
                         </a>
-                        <a href="#" class="hover:text-[#d8982e] transition-colors duration-300 text-xl md:text-base">
+                        <a href="#" class="hover:text-[#d8982e] transition-colors duration-300">
                             <i class="bi bi-twitter"></i>
                         </a>
-                        <a href="#" class="hover:text-[#d8982e] transition-colors duration-300 text-xl md:text-base">
+                        <a href="#" class="hover:text-[#d8982e] transition-colors duration-300">
                             <i class="bi bi-instagram"></i>
                         </a>
                     </div>

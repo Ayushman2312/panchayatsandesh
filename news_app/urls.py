@@ -28,3 +28,6 @@ urlpatterns = [
     path('archives/', ArchivesView.as_view(), name='archives'),
     path('api/archive-news/<uuid:news_id>/comments/', ArchiveNewsCommentView.as_view(), name='archive_news_comments'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
